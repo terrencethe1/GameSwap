@@ -1,5 +1,4 @@
-import User, { UserDocument } from "../models/User.js";
-import { GameDocument } from "../models/Game.js";
+import { User, UserDocument, GameDocument, SwapCatalogue, SwapCatalogueDocument } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
 // Argument Types
@@ -88,7 +87,7 @@ const resolvers = {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedGames: { bookId: removeGameArgs._id } } },
+                { $pull: { savedGames: { _id: removeGameArgs._id } } },
                 { new: true }
               );
               if (!updatedUser) {
