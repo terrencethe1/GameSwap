@@ -1,5 +1,5 @@
 import User, { UserDocument } from "../models/User.js";
-import { BookDocument } from "../models/Game.js";
+import { GameDocument } from "../models/Game.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
 // Argument Types
@@ -14,7 +14,7 @@ interface NewUserArgs {
     password: string;
 }
 
-interface MyBooksArgs {
+interface MyGamesArgs {
   _id: any;
   username: string;
 }
@@ -22,7 +22,7 @@ interface MyBooksArgs {
 const resolvers = {
     Query: {
         // get a single user by either their id or their username
-        me: async (_parent: any, _args: MyBooksArgs, context: any): Promise<UserDocument | null> => {
+        me: async (_parent: any, _args: MyGamesArgs, context: any): Promise<UserDocument | null> => {
           if (context.user) {
               // const params = _id ? { _id } : { username };
               const params = { id: context.user.id, username: context.user.username };
@@ -68,33 +68,33 @@ const resolvers = {
 
             return { token, user };
         },
-        // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
-        saveBook: async (_parent: any, saveBookArgs: BookDocument, context: any) => {
+        // save a game to a user's `savedGames` field by adding it to the set (to prevent duplicates)
+        saveGame: async (_parent: any, saveGameArgs: GameDocument, context: any) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedBooks: saveBookArgs } },
+                { $addToSet: { savedGames: saveGameArgs } },
                 { new: true, runValidators: true }
               );
               if (!updatedUser) {
-                throw new AuthenticationError(`Cannot add ${saveBookArgs}.`);
+                throw new AuthenticationError(`Cannot add ${saveGameArgs}.`);
               };
-              return updatedUser.savedBooks;
+              return updatedUser.savedGames;
             };
             throw new AuthenticationError('Cannot find context.');
         },
-        // remove a book from `savedBooks`
-        removeBook: async (_parent: any, removeBookArgs: BookDocument, context: any) => {
+        // remove a game from `savedGames`
+        removeGame: async (_parent: any, removeGameArgs: GameDocument, context: any) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedBooks: { bookId: removeBookArgs.bookId } } },
+                { $pull: { savedGames: { bookId: removeGameArgs._id } } },
                 { new: true }
               );
               if (!updatedUser) {
-                throw new AuthenticationError('Cannot find bookId.');
+                throw new AuthenticationError('Cannot find saved game _id.');
               };
-              return updatedUser.savedBooks;
+              return updatedUser.savedGames;
             };
             throw new AuthenticationError('Cannot find context.');
         },
