@@ -8,7 +8,7 @@ export interface SwapCatalogueDocument extends Document {
     allGames: GameDocument[];
     availableGames: GameDocument[];
     swappedGames: GameDocument[];
-}
+};
 
 const swapCatalogueSchema = new Schema<SwapCatalogueDocument> (
     {
@@ -24,6 +24,6 @@ const swapCatalogueSchema = new Schema<SwapCatalogueDocument> (
     }
 );
 
-const SwapCatalogue = model<SwapCatalogueDocument>('SwapCatalogue', swapCatalogueSchema)
+const SwapCatalogue = model<SwapCatalogueDocument>('SwapCatalogue', swapCatalogueSchema);
 
-export default SwapCatalogue
+export default SwapCatalogue;

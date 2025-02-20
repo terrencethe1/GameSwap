@@ -1,5 +1,4 @@
-import User, { UserDocument } from "../models/User.js";
-import { GameDocument } from "../models/Game.js";
+import { User, UserDocument, GameDocument, SwapCatalogue, SwapCatalogueDocument } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
 // Argument Types
