@@ -1,7 +1,7 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-// import schema from Book.js
+// import schema from Game.js
 import gameSchema from './Game.js';
 import type { GameDocument } from './Game.js';
 
@@ -58,7 +58,7 @@ userSchema.methods.isCorrectPassword = async function (password: string) {
 };
 
 // when we query a user, we'll also get another field called `gameCount` with the number of saved games we have
-userSchema.virtual('bookCount').get(function () {
+userSchema.virtual('gameCount').get(function () {
   return this.savedGames.length;
 });
 
