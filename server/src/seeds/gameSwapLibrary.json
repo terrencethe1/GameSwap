@@ -1,0 +1,10 @@
+[
+  {
+    "title": "test title",
+    "publisher": "some publisher",
+    "released": "February 21, 2025",
+    "description": "A hidden gem of a game!",
+    "image": "screenshot URL",
+    "available": true
+  }
+]
