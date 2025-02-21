@@ -1,6 +1,20 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 
+interface NameSearchResults {
+  slug: string;
+  name: string;
+}
+
+interface GameSwapType {
+  title: string;
+  publisher: string;
+  released: string;
+  description: string;
+  image: string;
+  available: boolean;
+}
+
 const router = express.Router();
 
 // GET /games - Get all games from RAWG
@@ -8,11 +22,14 @@ router.get('/allGames', async (_req: Request, res: Response) => {
   try {
     console.log(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
     const response = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+
     // console.log('Response:', response);
     const data = await response.json();
+
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
-    }
+    };
+
     // Express returns the "data" on the "res" object
     res.status(200).send(data);
   } catch (err) {
@@ -21,19 +38,30 @@ router.get('/allGames', async (_req: Request, res: Response) => {
   }
 });
 
-// GET /gamesByName/:name - Get games from RAWG by name or game_id number
+// GET /gamesByName/:name - Search for game information from RAWG by name or game_id number
 router.get('/gamesByName/:name', async (req: Request, res: Response) => {
   try {
     const cleanName: string = encodeURIComponent(req.params.name);
     console.log(`https://api.rawg.io/api/games?search=${cleanName}&search_exact=true&key=${process.env.RAWG_API_KEY}`);
     const response = await fetch(`https://api.rawg.io/api/games?search=${cleanName}&search_exact=true&key=${process.env.RAWG_API_KEY}`);
+
     // console.log('Response:', response);
     const data = await response.json();
+
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
-    }
-    // Express returns the "data" on the "res" object
-    res.status(200).send(data);
+    };
+
+    const cleanData: NameSearchResults[] = data.results.map(
+      (result: any) => {
+        return { slug: result.slug, name: result.name }
+      }
+    );
+
+    console.log(cleanData);
+
+    // Express returns the "cleanData" on the "res" object
+    res.status(200).send(cleanData);
   } catch (err) {
     console.log('an error occurred', err);
     res.json();
@@ -45,13 +73,25 @@ router.get('/gameInfoSlug/:slug', async (req: Request, res: Response) => {
   try {
     console.log(`https://api.rawg.io/api/games/${req.params.slug}?key=${process.env.RAWG_API_KEY}`);
     const response = await fetch(`https://api.rawg.io/api/games/${req.params.slug}?key=${process.env.RAWG_API_KEY}`);
+
     // console.log('Response:', response);
     const data = await response.json();
+
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
-    }
-    // Express returns the "data" on the "res" object
-    res.status(200).send(data);
+    };
+
+    const cleanData: GameSwapType = {
+      title: data.name,
+      publisher: data.publishers[0].name,
+      released: data.released,
+      image: data.background_image,
+      description: data.description,
+      available: true
+    };
+
+    // Express returns the "cleanData" on the "res" object
+    res.status(200).send(cleanData);
   } catch (err) {
     console.log('an error occurred', err);
     res.json();

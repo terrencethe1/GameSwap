@@ -1,10 +1,114 @@
 [
   {
-    "title": "test title",
-    "publisher": "some publisher",
+    "title": "Test Title",
+    "publisher": "Some Publisher",
     "released": "February 21, 2025",
     "description": "A hidden gem of a game!",
-    "image": "screenshot URL",
+    "image": "Screenshot URL",
+    "available": true
+  },
+  {
+    "title": "The Legend of Zelda: Ocarina of Time",
+    "publisher": "Nintendo",
+    "released": "1998-11-21",
+    "image": "https://media.rawg.io/media/games/3a0/3a0c8e9ed3a711c542218831b893a0fa.jpg",
+    "description": "<p>As a young boy, Link is tricked by Ganondorf, the King of the Gerudo Thieves. The evil human uses Link to gain access to the Sacred Realm, where he places his tainted hands on Triforce and transforms the beautiful Hyrulean landscape into a barren wasteland. Link is determined to fix the problems he helped to create, so with the help of Rauru he travels through time gathering the powers of the Seven Sages.</p>",
+    "available": true
+  },
+  {
+    "title": "The Legend of Zelda: Majora's Mask",
+    "publisher": "Nintendo",
+    "released": "2000-04-27",
+    "image": "https://media.rawg.io/media/games/b3c/b3c209cd49aae8a469a59b79b54dc599.jpg",
+    "description": "<p>Link must save the world! This time, he finds himself trapped in<br />\nTermina, an alternate version of Hyrule that is doomed to destruction in<br />\njust three short days. Link must race to recover the Ocarina of Time<br />\n(which allows him to manipulate time in multiple ways), defeat<br />\nchallenging bosses in dungeons spread across Termina, and discover the<br />\nkey to the mystery of Majora’s Mask. Along the way he’ll obtain new<br />\nweapons and items and help other characters (some strangely familiar) in<br />\ntheir everyday lives. In addition, Link must utilize a wide assortment<br />\nof masks scattered throughout Termina, each with its own specific use or<br />\npower. Never before has three days offered so much in the way of action,<br />\nmind-boggling puzzles, and depth—The Legend of Zelda: Majora’s Mask is<br />\nan adventure unlike any other!<br />\nThis classic game is part of the Virtual Console service, which brings you great games created for consoles such as NES™, Super NES™ and Game Boy™ Advance. See more Virtual Console games for Wii.</p>",
+    "available": true
+  },
+  {
+    "title": "Banjo-Kazooie",
+    "publisher": "Microsoft Studios",
+    "released": "1998-05-31",
+    "image": "https://media.rawg.io/media/screenshots/f0d/f0da831778e57b58636ccaf20a7cc6e6.jpg",
+    "description": "<p>The bear and bird&#39;s first ever outing available in full. Loads of rollicking fun to be had here and with the legendary Stop N Swop feature reinstated. You’ll never look the same again at a jigsaw.</p>",
+    "available": true
+  },
+  {
+    "title": "Banjo-Tooie",
+    "publisher": "Microsoft Studios",
+    "released": "2000-11-20",
+    "image": "https://media.rawg.io/media/screenshots/84d/84d128e39e3d57a040c1ae21607135bb.jpg",
+    "description": "<p>The bear and bird’s second outing available in full. Loads of rollicking fun to be had here and with the legendary Stop N Swap feature reinstated. The best use of a backpack in a game ever! This game requires the Xbox 360 hard drive or the 512MB Memory Unit for storage. There are no refunds for this item. For more information, see www.xbox.com/live/accounts.</p>",
+    "available": true
+  },
+  {
+    "title": "Star Fox 64 (1997)",
+    "publisher": "Nintendo",
+    "released": "1997-04-27",
+    "image": "https://media.rawg.io/media/screenshots/569/5694a091203e4d29c15a9b734f933e9c.jpg",
+    "description": "<p>Star Fox 64 was the first Nintendo 64 game to have included support for the Rumble Pak, with which it initially came bundled. The game has sold over 4 million copies since its release, making it one of the best-selling games on the system. The game received critical acclaim for smooth animation, detailed visuals, voice acting and use of multiple gameplay paths. It has been deemed by many critics and gamers to be one of the best games ever made.</p>",
+    "available": true
+  },
+  {
+    "title": "Donkey Kong 64",
+    "publisher": "Nintendo",
+    "released": "1999-11-22",
+    "image": "https://media.rawg.io/media/games/458/4589f9727a1b8bcc0109e5a33a4ea944.jpg",
+    "description": "<p>Donkey Kong 64 is a 1999 adventure platform video game for the Nintendo 64 console, and the first in the Donkey Kong series to feature 3D gameplay. As the gorilla Donkey Kong, the player explores the themed levels of an island to collect items and rescue his kidnapped friends from K. Rool. The player completes minigames and puzzles as five playable Kong characters—each with its own special abilities—to receive bananas and other collectibles. In a separate multiplayer mode, up to four players can compete in deathmatch and last man standing games.<br />\nRare, who had previously developed the Donkey Kong Country games, began development on the 3D Donkey Kong in 1997. A 16-person team, with many members recruited from Rare&#39;s Banjo group, finished the game in 1999, when it was published by Nintendo for North America in November and worldwide by December. It was the first game to require the Nintendo 64 console&#39;s Expansion Pak, an accessory that added memory resources. The game had an exceptionally large marketing budget that included advertisements, sweepstakes, and a national tour.<br />\nThe game received universal acclaim from reviewers and was Nintendo&#39;s top seller during the 1999 holiday season, with 2.3 million units sold by 2004. It won the 1999 E3 Game Critics award for Best Platform Game, and multiple awards and nominations from games magazines. Reviewers noted the game&#39;s exceptional size and length, but criticized its emphasis on item collection and backtracking. Some cited its similarity in gameplay and visuals to Rare&#39;s 1998 predecessor, Banjo-Kazooie, despite Donkey Kong 64&#39;s mandatory memory add-on. The game&#39;s camera controls also frustrated reviewers. Critics felt that the game did not meet the revolutionary potential of Donkey Kong Country, but remained among the best 3D platform games on the console.<br />\nDonkey Kong 64 is remembered as the emblematic example of Rare&#39;s &quot;collect-a-thon&quot; adventure platformers for the tedium of its collection tasks. A rap song from the game&#39;s introductory sequence—the DK Rap—is often cited among the worst songs to feature in a video game. The title was later released on Nintendo&#39;s Wii U Virtual Console in 2015.</p>",
+    "available": true
+  },
+  {
+    "title": "Grim Guardians: Demon Purge",
+    "publisher": "Inti Creates",
+    "released": "2023-02-23",
+    "image": "https://media.rawg.io/media/screenshots/6d8/6d8175c97052021a031ba29d431c56bf.jpg",
+    "description": "When a demon's castle darkens the land, two sisters challenge its halls.<br/>\r\nTogether they can break the curse.<br/>\n<br/>\r\nIn order to save their school after it turns into a massive demonic castle, two \"Demon Hunter\" sisters slash and shoot their way through this 2D action adventure.<br/>\r\nPlayers can swap between control of both characters on the fly, each with entirely different skillsets. Proceed through the castle while confronting the demonic bosses that await deep within. <br/>\r\nEach boss yields new weapons to wield, allowing for more varied exploration and opening up new routes.<br/>\n<br/>\n<br/>\r\n■Swap out on the fly as you traverse through the demonic castle!<br/>\n<br/>\r\nTake control of both the tag-team Kamizono siblings. Make the most of long-distance focused Shinobu and close-range brawler Maya Kamizono as you make your way through the castle.<br/>\r\nEach sibling has a range of unique sub-weapons, giving you a wealth of options to switch your strategy up whenever the time calls for it. Don’t hesitate to make use of them so long as you have Weapon Points in stock!<br/>\r\nIn the event that one of the siblings falls in battle, they can be resuscitated freely with \"Sister Rescue\"—provided you can make it back to where they fell.<br/>\n<br/>\n<br/>\r\n■Defeat bosses to obtain new sub-weapons, opening up a whole new layer of exploration!<br/>\n<br/>\r\nDefeating bosses will yield new sub-weapons, providing the siblings with exciting new abilities.<br/>\r\nThese sub-weapons also open up new routes and means of exploration in the castles.<br/>\n<br/>\n<br/>\r\n■Enjoy the story your way with \"Pure\" or \"Refined\" voice tracks!<br/>\n<br/>\r\nGrim Guardians' story focuses on two main aspects: the mystery behind the school's transformation, and the whereabouts of the other students.<br/>\r\nEnjoy the original experience in \"Pure\" mode with all of the original Japanese voices for story mode, or choose “Refined” for English voice acting focused on the action, tailored for fans of the genre.<br/>\n<br/>\n<br/>\r\n■Adjust the difficulty to your playing needs with the unique Style system!<br/>\n<br/>\r\nA total of 3 different styles—\"Casual\", \"Veteran\" and \"Legend\"—are available for selection, allowing players to adjust the difficulty to their needs. This can be changed at any time after beginning the game with no drawbacks.<br/>\n<br/>\r\nWhat's more, co-op with both Shinobu and Maya will be possible should two controllers be available. It's possible to jump-in at any time during the game, so don't hesitate to invite friends along on your journey to conquer this mysterious demonic castle.",
+    "available": true
+  },
+  {
+    "title": "Hyperdimension Neptunia",
+    "publisher": "NIS America",
+    "released": "2010-08-19",
+    "image": "https://media.rawg.io/media/screenshots/f41/f41040d0fcef65a0b69bceef964438a2.jpg",
+    "description": "Hyperdimension Neptunia",
+    "available": true
+  },
+  {
+    "title": "Megadimension Neptunia VII",
+    "publisher": "Idea Factory",
+    "released": "2015-04-23",
+    "image": "https://media.rawg.io/media/screenshots/f3d/f3dce7f1cdac97323ef27dacce6ee7dc.jpg",
+    "description": "<p>New challengers are taking control of Gamindustri, and Neptune&#39;s nowhere in sight. Now she’s gotta help a mysterious stranger fight a colossal new evil, reclaim her Goddess title, and find some time for pudding! Go next gen with Giant Battles, multi-worlds, and multiple storylines in this JRPG!<br />\nNew Battle Features Characters can link up for stronger attacks, “Parts Break” allows you to split enemies into pieces to lower their stats and disable special attacks, and “Giant Battles” impose limits that will challenge the strategist in you!<br />\nNEXT mode A second transformation is now available! You can break those big baddies into bits with NEXT mode, which features new special skills and a new costume for the CPUs!<br />\nThree Worlds, Three Stories Three different story modes! With new CPUs and characters at your side, you must fight through three dimensions to save Gamindustri!<br />\nNew Dungeon Minigame! An homage to the classic “Spelunker,” you receive special items when you clear this dungeon under the time limit!</p>",
+    "available": true
+  },
+  {
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "publisher": "Nintendo",
+    "released": "2017-03-03",
+    "image": "https://media.rawg.io/media/games/cc1/cc196a5ad763955d6532cdba236f730c.jpg",
+    "description": "<p>The Legend of Zelda: Breath of the Wild is an adventure game developed by Nintendo. It is the nineteenth installment in the series.</p>\n<p>After awakening from a hundred year sleep, memoryless Link hears a mysterious female voice that guides him to a destroyed kingdom of Hyrule. He finds a Wiseman who says that a ruthless creature, Calamity Ganon, was imprisoned for 100 years. Even though the creature is trapped, it is still gaining power. Link sets out to kill Ganon before he frees himself and destroys the world.</p>\n<p>In contrast to the previous titles in the series, Breath of the Wild the player to explore a vast open world. At the beginning of the game, a small tutorial is given to the players and they are free to travel the world at the pace they see fit. Link can climb almost every surface in the world, cook food to restore health. Fast travel to certain places in the world is also available for the players. The world is highly interactive thanks to the chemistry engine.</p>",
+    "available": true
+  },
+  {
+    "title": "Super Mario Odyssey",
+    "publisher": "Nintendo",
+    "released": "2017-10-27",
+    "image": "https://media.rawg.io/media/games/267/267bd0dbc496f52692487d07d014c061.jpg",
+    "description": "<p>Super Mario Odyssey is a 3D platform game, a part of Nintendo’s Super Mario series. </p>\n<h3>Story</h3>\n<p>The game follows Mario on his quest to save Princess Peach from her forced marriage with Bowser. The game starts with Mario fighting Bowser on its aircraft. Bowers knock Mario off the ship and shreds his cap into pieces. Mario awakens in the Cap Kingdom inhabited with hat-like spirits and befriends one of them named Cappy. It turns out, Bowser also kidnapped Cappy’s sister Tiara, and now the heroes must chase Bowser through several kingdoms to save Peach and Tiara. </p>\n<h3>Gameplay</h3>\n<p>The gameplay of Super Mario Odyssey draws inspiration from Super Mario 64 and Super Mario Sunshine. The game consists 17 levels (named as “kingdoms”). In most of them, your goal is to collect a certain amount of Power Moons. Collecting enough of them allows the player to progress to the next kingdom. Some moons can be found in different parts of the level or acquired as a reward for completing certain tasks or challenges. The Mario’s moveset mostly resembles that of Super Mario 64 and includes wall jumps, triple jumps, somersaults, long jumps, rolling on the ground. The main new gameplay feature is that Mario can throw his hat to create temporary platforms, grab objects, attack enemies, or possess them. Possessing enemies gives you new moves and sometimes is necessary to reach certain parts of the level.</p>",
+    "available": true
+  },
+  {
+    "title": "Metal Gear Rising: Revengeance",
+    "publisher": "Konami",
+    "released": "2013-02-19",
+    "image": "https://media.rawg.io/media/games/8e6/8e699e91cf77c2060b6d515e2135b1b1.jpg",
+    "description": "<p>After the events of the uprising took four years. Naomi Hunter creates the FOXAVILE computer virus that destroys the system of &quot;Sons of the Patriots&quot;, thereby putting an end to the military economy, what turned the war into a profitable business. PMSC (Private Military Security Companies) began to protect essential people and act as peacekeepers. You play as Raiden, a katana-wielding cyborg who is forced to join the PMSC to protect his family.</p>\n<p>Most of the gameplay Raiden has to cut enemies and some objects with a mighty high-frequency sword. Along with the standard attacks available &quot;Free sword mode&quot; that allows you to control the assault. In the open mode, attacks are more powerful, but the range of their impact is lower. For the elimination of enemies in Free mode are given points that allow you to restore health and the scale of the free sword with the help of fluids that are in the spine of dead cyborgs.</p>\n<p>Being undetected, you can perform silent and quick kills on some enemies approaching from behind or from above. Available, at least, ten kinds of weapons and a few suits.</p>",
+    "available": true
+  },
+  {
+    "title": "Halo: Combat Evolved",
+    "publisher": "Microsoft Studios",
+    "released": "2001-11-15",
+    "image": "https://media.rawg.io/media/games/abf/abffd94ed6fe34027c720bee593c06d2.jpg",
+    "description": "<p>Humanity is in the midst of a long war against an alien alliance called the Covenant which has been wiping out colony after colony. Your hero is Master Chief, who is given no name beyond his rank in the game itself. He is stationed on the Pillar of Autumn, a ship which, per protocol makes a jump in a random direction to retreat to avoid revealing the location of Earth. They find themselves at the titular Halo, a planet-sized ring of mysterious origin, and function with the Covenant on their heels. Master Chief must repel the Covenant assault and discover the secrets of Halo with the assistance of the female AI Cortana who lives in his suit and gives missions.</p>\n<p>Halo: Combat Evolved is a sci-fi first-person shooter with considerable driving elements. Features include friendly NPCs who fight alongside the Chief, squad-based AI where enemies groups work together to flank you under the direction of a leader unit and can be demoralized by his death. They also use cover, set ambushes, etc.</p>\n<p>Only two weapons may be carried at a time: one active and one on backup. There are five human weapons and three Covenant with distinct art styles for the two groups. Human weapons look basically like real guns and fire projectiles. Covenant are sleek and purple and fire energy. For the most part, weapons are not just left around the environment and must be procured from fallen enemies though there are supply points.</p>\n<p>Your life is armor and health as in most games of the genre, however, rather than armor being an item that is picked up, it is a force field which quickly recharges itself after several seconds without taking damage, which emphasizes finding cover.</p>\n<p>One of the most significant features is vehicles. You can drive a variety of vehicles in both single-player and multiplayer, some of which have additional seats for passengers or gunners which can be used by AI characters. Vehicles also come in distinct human and Covenant varieties with their design philosophies. Human vehicles roll around the ground on wheels and covenant vehicles hover or fly.</p>\n<p>Halo also has a significant multiplayer component with basic deathmatch (called slayer here), capture the flag with the unusual addition that the flag takes your weapon spot while you are holding it, so shooting your way in and out of the base on your own is not an option, territories, and some options unique to the game, such as oddball, where you must hold onto a skull for the longest time, race where you score points by getting to checkpoints and juggernaut, where one super-powered player must get points by killing the others and the other players try to kill him to steal his powers. There is also a game editor which allows you to set custom rules for all the basic game types. All the playable weapons and vehicles from the campaign mode are available in the multiplayer maps with the ability for members of the same team to share the game&#39;s distinctive Warthog vehicle, which is essentially a small truck with a mounted gun on the back.</p>",
     "available": true
   }
 ]
