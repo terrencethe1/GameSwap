@@ -1,7 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 
-interface NameSearchResults {
+interface SearchResults {
   slug: string;
   name: string;
 }
@@ -30,8 +30,30 @@ router.get('/allGames', async (_req: Request, res: Response) => {
       throw new Error('invalid API response, check the network tab');
     };
 
+    let cleanData: SearchResults[] = data.results.map(
+      (result: any) => {
+        return { slug: result.slug, name: result.name }
+      }
+    );
+
+    if (data.next) {
+      let nextPage = data.next;
+      // Grab results from the first 10 pages of the search results.
+      for (let page = 0; page < 10; page++) {
+        let response1 = await fetch(nextPage);
+        let data1 = await response1.json();
+        let cleanData1: SearchResults[] = data1.results.map(
+          (result: any) => {
+            return { slug: result.slug, name: result.name }
+          }
+        );
+        cleanData = cleanData.concat(cleanData1);
+        nextPage = data1.next;
+      };
+    };
+
     // Express returns the "data" on the "res" object
-    res.status(200).send(data);
+    res.status(200).send(cleanData);
   } catch (err) {
     console.log('an error occurred', err);
     res.json();
@@ -52,11 +74,27 @@ router.get('/gamesByName/:name', async (req: Request, res: Response) => {
       throw new Error('invalid API response, check the network tab');
     };
 
-    const cleanData: NameSearchResults[] = data.results.map(
+    let cleanData: SearchResults[] = data.results.map(
       (result: any) => {
         return { slug: result.slug, name: result.name }
       }
     );
+
+    if (data.next) {
+      let nextPage = data.next;
+      // Grab results from the first 10 pages of the search results.
+      for (let page = 0; page < 10; page++) {
+        let response1 = await fetch(nextPage);
+        let data1 = await response1.json();
+        let cleanData1: SearchResults[] = data1.results.map(
+          (result: any) => {
+            return { slug: result.slug, name: result.name }
+          }
+        );
+        cleanData = cleanData.concat(cleanData1);
+        nextPage = data1.next;
+      };
+    };
 
     console.log(cleanData);
 
