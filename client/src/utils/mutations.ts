@@ -27,24 +27,28 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const REMOVE_BOOK = gql `
-mutation RemoveBook($bookId: ID!) {
-  removeBook(bookId: $bookId) {
-    title
-    image
+mutation RemoveGame($id: ID!) {
+  removeGame(_id: $id) {
+    _id
+    available
     description
-    bookId
-    authors
+    image
+    publisher
+    released
+    title
   }
 }
 `;
 
-export const SAVE_BOOK = gql `
-mutation SaveBook($authors: [String], $image: String, $title: String!, $bookId: String!, $description: String!) {
-  saveBook(authors: $authors, image: $image, title: $title, bookId: $bookId, description: $description) {
-    authors
-    bookId
+export const SAVE_GAME = gql `
+mutation SaveGame($description: String!, $title: String!, $publisher: String, $image: String, $released: String) {
+  saveGame(description: $description, title: $title, publisher: $publisher, image: $image, released: $released) {
+    _id
+    available
     description
     image
+    publisher
+    released
     title
   }
 }
