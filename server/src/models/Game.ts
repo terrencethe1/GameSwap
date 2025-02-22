@@ -29,7 +29,8 @@ const gameSchema = new Schema<GameDocument>({
     type: String
   },
   available: {
-    type: Boolean
+    type: Boolean,
+    default: true
   }
 });
 
