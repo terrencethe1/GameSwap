@@ -26,7 +26,7 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
 }
 `;
 
-export const REMOVE_BOOK = gql `
+export const REMOVE_GAME = gql `
 mutation RemoveGame($id: ID!) {
   removeGame(_id: $id) {
     _id
