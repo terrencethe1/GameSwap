@@ -11,9 +11,11 @@ const typeDefs = `
     type Game {
         _id: ID
         publisher: String
+        released: String
         description: String
         image: String
         title: String
+        available: Boolean
     }
 
     type Auth {
@@ -23,6 +25,7 @@ const typeDefs = `
 
     type Query {
         me: User
+        gameSwapLibrary: [Game]
     }
 
     type Mutation {
