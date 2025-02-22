@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import fs from 'node:fs/promises';
-import seedUpdateService from '../../services/seedUpdateService.js';
+// import seedUpdateService from '../../services/seedUpdateService.js';
 
 interface SearchResults {
   slug: string;
@@ -133,7 +133,7 @@ router.get('/gameInfoSlug/:slug', async (req: Request, res: Response) => {
     console.log(cleanData);
 
     // Update the gameSwapLibrary.json file with the new data.
-    await seedUpdateService.addSearchResults(cleanData.title, cleanData.publisher, cleanData.released, cleanData.description, cleanData.image, cleanData.available);
+    // await seedUpdateService.addSearchResults(cleanData.title, cleanData.publisher, cleanData.released, cleanData.description, cleanData.image, cleanData.available);
 
     // Express returns the "cleanData" on the "res" object
     res.status(200).send(cleanData);
