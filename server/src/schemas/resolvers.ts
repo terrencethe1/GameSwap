@@ -20,7 +20,7 @@ interface MyGamesArgs {
 
 const resolvers = {
     Query: {
-        // get a single user by either their id or their username
+        // get a single user by either his id or his username
         me: async (_parent: any, _args: MyGamesArgs, context: any): Promise<UserDocument | null> => {
           if (context.user) {
               // const params = _id ? { _id } : { username };
