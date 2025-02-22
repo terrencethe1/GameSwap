@@ -1,13 +1,5 @@
 [
   {
-    "title": "Test Title",
-    "publisher": "Some Publisher",
-    "released": "February 21, 2025",
-    "description": "A hidden gem of a game!",
-    "image": "Screenshot URL",
-    "available": true
-  },
-  {
     "title": "The Legend of Zelda: Ocarina of Time",
     "publisher": "Nintendo",
     "released": "1998-11-21",
