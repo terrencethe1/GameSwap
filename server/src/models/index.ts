@@ -1,4 +1,4 @@
 import User, { UserDocument } from './User.js';
-import { GameDocument } from './Game.js';
+import { GameDocument, LibraryGame } from './Game.js';
 
-export { User, UserDocument, GameDocument };
+export { User, UserDocument, GameDocument, LibraryGame };

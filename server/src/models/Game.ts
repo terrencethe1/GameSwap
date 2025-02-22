@@ -1,13 +1,15 @@
-import { Schema, type Document } from 'mongoose';
+import { Schema, model, type Document } from 'mongoose';
 
 export interface GameDocument extends Document {
   title: string;
   publisher: string;
+  released: string;
   description: string;
   image: string;
+  available: boolean;
 }
 
-// This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedGames` array in User.js
+// This is a subdocument schema. It will be used as the schema for the User's `savedGames` array in User.js.
 const gameSchema = new Schema<GameDocument>({
   publisher: {
     type: String,
@@ -23,6 +25,17 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
     required: true,
   },
+  released: {
+    type: String
+  },
+  available: {
+    type: Boolean,
+    default: true
+  }
 });
 
-export default gameSchema;
+
+// This is the GameSwap GameLibrary model.
+const LibraryGame = model<GameDocument>('LibraryGame', gameSchema);
+
+export { gameSchema, LibraryGame };

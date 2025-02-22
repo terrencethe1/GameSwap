@@ -2,8 +2,7 @@ import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // import schema from Game.js
-import gameSchema from './Game.js';
-import type { GameDocument } from './Game.js';
+import { gameSchema, type GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
   id: string;
@@ -39,7 +38,7 @@ const userSchema = new Schema<UserDocument>(
   {
     toJSON: {
       virtuals: true,
-    },
+    }
   }
 );
 

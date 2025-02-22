@@ -1,4 +1,4 @@
-import { User, UserDocument, GameDocument } from "../models/index.js";
+import { User, UserDocument, GameDocument, LibraryGame } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
 // Argument Types
@@ -20,7 +20,7 @@ interface MyGamesArgs {
 
 const resolvers = {
     Query: {
-        // get a single user by either their id or their username
+        // get a single user by either his id or his username
         me: async (_parent: any, _args: MyGamesArgs, context: any): Promise<UserDocument | null> => {
           if (context.user) {
               // const params = _id ? { _id } : { username };
@@ -31,6 +31,13 @@ const resolvers = {
           };
           throw new AuthenticationError('Could not authenticate user.');
         },
+        gameSwapLibrary: async (_parent: any, _args: any, context: any): Promise<GameDocument[]> => {
+          if (context.user) {
+            return LibraryGame.find();
+          } else {
+            return LibraryGame.find().select('-available');
+          };
+        } 
     },
     Mutation: {
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)

@@ -3,15 +3,32 @@ import { gql } from '@apollo/client';
 export const GET_ME = gql `
 query GetMe {
   me {
+    _id
     username
     email
-    savedBooks {
+    gameCount
+    savedGames {
       title
       image
       description
-      bookId
-      authors
+      publisher
+      released
+      available
     }
+  }
+}
+`;
+
+export const GAME_SWAP_LIBRARY = gql `
+query GameSwapLibrary {
+  gameSwapLibrary {
+    _id
+    available
+    description
+    image
+    publisher
+    released
+    title
   }
 }
 `;

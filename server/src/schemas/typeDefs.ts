@@ -5,15 +5,17 @@ const typeDefs = `
         email: String
         password: String
         savedGames: [Game]
-        bookCount: Int
+        gameCount: Int
     }
 
     type Game {
         _id: ID
         publisher: String
+        released: String
         description: String
         image: String
         title: String
+        available: Boolean
     }
 
     type Auth {
@@ -23,12 +25,13 @@ const typeDefs = `
 
     type Query {
         me: User
+        gameSwapLibrary: [Game]
     }
 
     type Mutation {
         loginUser(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveGame(publisher: String, description: String!, image: String, title: String!): [Game]
+        saveGame(publisher: String, description: String!, image: String, title: String!, released: String): [Game]
         removeGame(_id: ID!): [Game]
     }
 `;
