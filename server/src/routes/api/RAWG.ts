@@ -1,5 +1,6 @@
-import express from 'express';
-import type { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
+import fs from 'node:fs/promises';
+import seedUpdateService from '../../services/seedUpdateService.js';
 
 interface SearchResults {
   slug: string;
@@ -14,6 +15,52 @@ interface GameSwapType {
   image: string;
   available: boolean;
 }
+
+// Clean the response data from RAWG searches to only include the name and slug for each game.
+const dataCleaner = async (data: any): Promise<SearchResults[]> => {
+  let cleanData: SearchResults[] = data.results.map(
+    (result: any) => {
+      return { slug: result.slug, name: result.name }
+    }
+  );
+
+  if (data.next) {
+    let nextPage = data.next;
+    // Grab results from the first 10 pages of the search results.
+    for (let page = 0; page < 10; page++) {
+      let response1 = await fetch(nextPage);
+      let data1 = await response1.json();
+      let cleanData1: SearchResults[] = data1.results.map(
+        (result: any) => {
+          return { slug: result.slug, name: result.name }
+        }
+      );
+      cleanData = cleanData.concat(cleanData1);
+      // Break out of the loop if there is no next page.
+      if (!data1.next) {break};
+      nextPage = data1.next;
+    };
+  };
+
+  return cleanData;
+};
+
+// Clean the response data from a RAWG slug search to only include data compliant with the GameSwapType interface.
+const slugDataCleaner = (data: any): GameSwapType => {
+  const cleanData: GameSwapType = {
+    title: data.name,
+    publisher: data.publishers[0].name,
+    released: data.released,
+    image: data.background_image,
+    description: data.description,
+    available: true
+  };
+  return cleanData;
+};
+
+const writeSearchHistory = async (cleanData: SearchResults[]) => {
+  return await fs.writeFile('src/seeds/searchHistory.json', JSON.stringify(cleanData, null, '\t'));
+};
 
 const router = express.Router();
 
@@ -30,27 +77,7 @@ router.get('/allGames', async (_req: Request, res: Response) => {
       throw new Error('invalid API response, check the network tab');
     };
 
-    let cleanData: SearchResults[] = data.results.map(
-      (result: any) => {
-        return { slug: result.slug, name: result.name }
-      }
-    );
-
-    if (data.next) {
-      let nextPage = data.next;
-      // Grab results from the first 10 pages of the search results.
-      for (let page = 0; page < 10; page++) {
-        let response1 = await fetch(nextPage);
-        let data1 = await response1.json();
-        let cleanData1: SearchResults[] = data1.results.map(
-          (result: any) => {
-            return { slug: result.slug, name: result.name }
-          }
-        );
-        cleanData = cleanData.concat(cleanData1);
-        nextPage = data1.next;
-      };
-    };
+    const cleanData = await dataCleaner(data);
 
     // Express returns the "data" on the "res" object
     res.status(200).send(cleanData);
@@ -74,29 +101,11 @@ router.get('/gamesByName/:name', async (req: Request, res: Response) => {
       throw new Error('invalid API response, check the network tab');
     };
 
-    let cleanData: SearchResults[] = data.results.map(
-      (result: any) => {
-        return { slug: result.slug, name: result.name }
-      }
-    );
-
-    if (data.next) {
-      let nextPage = data.next;
-      // Grab results from the first 10 pages of the search results.
-      for (let page = 0; page < 10; page++) {
-        let response1 = await fetch(nextPage);
-        let data1 = await response1.json();
-        let cleanData1: SearchResults[] = data1.results.map(
-          (result: any) => {
-            return { slug: result.slug, name: result.name }
-          }
-        );
-        cleanData = cleanData.concat(cleanData1);
-        nextPage = data1.next;
-      };
-    };
+    const cleanData = await dataCleaner(data);
 
     console.log(cleanData);
+
+    await writeSearchHistory(cleanData);
 
     // Express returns the "cleanData" on the "res" object
     res.status(200).send(cleanData);
@@ -119,14 +128,12 @@ router.get('/gameInfoSlug/:slug', async (req: Request, res: Response) => {
       throw new Error('invalid API response, check the network tab');
     };
 
-    const cleanData: GameSwapType = {
-      title: data.name,
-      publisher: data.publishers[0].name,
-      released: data.released,
-      image: data.background_image,
-      description: data.description,
-      available: true
-    };
+    const cleanData: GameSwapType = slugDataCleaner(data);
+
+    console.log(cleanData);
+
+    // Update the gameSwapLibrary.json file with the new data.
+    await seedUpdateService.addSearchResults(cleanData.title, cleanData.publisher, cleanData.released, cleanData.description, cleanData.image, cleanData.available);
 
     // Express returns the "cleanData" on the "res" object
     res.status(200).send(cleanData);
