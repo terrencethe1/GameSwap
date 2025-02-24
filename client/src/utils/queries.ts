@@ -8,6 +8,7 @@ query GetMe {
     email
     gameCount
     savedGames {
+      _id
       title
       image
       description
