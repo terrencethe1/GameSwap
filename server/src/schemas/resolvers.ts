@@ -27,7 +27,7 @@ const resolvers = {
               const params = { id: context.user.id, username: context.user.username };
               return User.findOne({
                 $or: [{ _id: params.id }, { username: params.username }],
-            });
+            }).populate('savedGames');
           };
           throw new AuthenticationError('Could not authenticate user.');
         },
@@ -81,7 +81,7 @@ const resolvers = {
                 { _id: context.user._id },
                 { $addToSet: { savedGames: saveGameArgs } },
                 { new: true, runValidators: true }
-              );
+              ).populate('savedGames');
               if (!updatedUser) {
                 throw new AuthenticationError(`Cannot add ${saveGameArgs}.`);
               };
@@ -96,7 +96,7 @@ const resolvers = {
                 { _id: context.user._id },
                 { $pull: { savedGames: { _id: removeGameArgs._id } } },
                 { new: true }
-              );
+              ).populate('savedGames');
               if (!updatedUser) {
                 throw new AuthenticationError('Cannot find saved game _id.');
               };

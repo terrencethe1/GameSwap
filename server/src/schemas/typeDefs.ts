@@ -31,7 +31,7 @@ const typeDefs = `
     type Mutation {
         loginUser(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveGame(publisher: String, description: String!, image: String, title: String!, released: String): [Game]
+        saveGame(_id: ID!): [Game]
         removeGame(_id: ID!): [Game]
     }
 `;
