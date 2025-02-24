@@ -40,8 +40,6 @@ const SearchLibrary = () => {
     const getLibraryData = async () => {
       try {
         await getLibrary;
-
-        console.log(libraryData);
     
         if (!loading) {
           setSearchedGames(libraryData.gameSwapLibrary);
@@ -52,8 +50,9 @@ const SearchLibrary = () => {
       }
     };
     getLibraryData();
+    saveGameIds(savedGameIds);
     return () => saveGameIds(savedGameIds);
-  }, [data]);
+  }, [data, savedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -112,6 +111,9 @@ const SearchLibrary = () => {
 
       // if game successfully saves to user's account, save game id to state
       setSavedGameIds([...savedGameIds, gameToSave._id]);
+
+      console.log("savedGameIds", [...savedGameIds, gameToSave._id]);
+
     } catch (err) {
       console.error(err);
     }
