@@ -25,26 +25,26 @@ const SearchLibrary = () => {
 
   const libraryData = data;
 
-  // create state for holding returned google api data
-  const [searchedBooks, setSearchedBooks] = useState<Game[]>([]);
+  // create state for holding returned gameSwapLibrary data
+  const [searchedGames, setSearchedGames] = useState<Game[]>([]);
 
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
   // create state to hold saved game _id values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedGameIds());
+  const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     const getLibraryData = async () => {
       try {
         await getLibrary;
-        
+
         console.log(libraryData);
     
         if (!loading) {
-          setSearchedBooks(libraryData.gameSwapLibrary);
+          setSearchedGames(libraryData.gameSwapLibrary);
         };
 
       } catch (err) {
@@ -52,7 +52,7 @@ const SearchLibrary = () => {
       }
     };
     getLibraryData();
-    return () => saveGameIds(savedBookIds);
+    return () => saveGameIds(savedGameIds);
   }, [data]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
@@ -84,7 +84,7 @@ const SearchLibrary = () => {
         available: game.available
       }));
 
-      setSearchedBooks(gameData);
+      setSearchedGames(gameData);
       setSearchInput('');
     } catch (err) {
       console.error(err);
@@ -93,8 +93,8 @@ const SearchLibrary = () => {
 
   // create function to handle saving a game to our user profile
   const handleSaveGame = async (_id: string) => {
-    // find the game in `searchedBooks` state by the matching _id
-    const gameToSave: Game = searchedBooks.find((book) => book._id === _id)!;
+    // find the game in `searchedGames` state by the matching _id
+    const gameToSave: Game = searchedGames.find((game) => game._id === _id)!;
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -110,8 +110,8 @@ const SearchLibrary = () => {
         throw new Error('something went wrong!');
       };
 
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, gameToSave._id]);
+      // if game successfully saves to user's account, save game id to state
+      setSavedGameIds([...savedGameIds, gameToSave._id]);
     } catch (err) {
       console.error(err);
     }
@@ -121,7 +121,7 @@ const SearchLibrary = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
@@ -131,7 +131,7 @@ const SearchLibrary = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a game'
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -146,12 +146,12 @@ const SearchLibrary = () => {
 
       <Container>
         <h2 className='pt-5'>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
+          {searchedGames.length
+            ? `Viewing ${searchedGames.length} results:`
+            : 'Search for a game to begin'}
         </h2>
         <Row>
-          {searchedBooks.map((game) => {
+          {searchedGames.map((game) => {
             return (
               <Col md="4" key={game.title}>
                 <Card border='dark'>
@@ -160,14 +160,15 @@ const SearchLibrary = () => {
                   ) : null}
                   <Card.Body>
                     <Card.Title>{game.title}</Card.Title>
+                    <p className='small'>Released: {game.released}</p>
                     <p className='small'>Publisher: {game.publisher}</p>
                     <Card.Text>{game.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedBookIds?.some((savedBookId: string) => savedBookId === game._id)}
+                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
-                        {savedBookIds?.some((savedBookId: string) => savedBookId === game._id)
+                        {savedGameIds?.some((savedGameId: string) => savedGameId === game._id)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>
