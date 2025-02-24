@@ -32,9 +32,9 @@ const SearchLibrary = () => {
   const [searchInput, setSearchInput] = useState('');
 
   // create state to hold saved game _id values
-  const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
+  const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
-  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
+  // set up useEffect hook to save `recordedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     const getLibraryData = async () => {
@@ -50,9 +50,9 @@ const SearchLibrary = () => {
       }
     };
     getLibraryData();
-    saveGameIds(savedGameIds);
-    return () => saveGameIds(savedGameIds);
-  }, [data, savedGameIds]);
+    saveGameIds(recordedGameIds);
+    return () => saveGameIds(recordedGameIds);
+  }, [data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -110,9 +110,9 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setSavedGameIds([...savedGameIds, gameToSave._id]);
+      setRecordedGameIds([...recordedGameIds, gameToSave._id]);
 
-      console.log("savedGameIds", [...savedGameIds, gameToSave._id]);
+      console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
 
     } catch (err) {
       console.error(err);
@@ -167,10 +167,10 @@ const SearchLibrary = () => {
                     <Card.Text>{game.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
-                        {savedGameIds?.some((savedGameId: string) => savedGameId === game._id)
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>
