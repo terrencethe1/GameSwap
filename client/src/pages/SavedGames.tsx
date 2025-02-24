@@ -2,23 +2,20 @@ import { useState, useEffect } from 'react';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeGameId } from '../utils/localStorage';
 import type { User } from '../models/User';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import { REMOVE_BOOK } from '../utils/mutations';
+import { REMOVE_GAME } from '../utils/mutations';
 
-const SavedBooks = () => {
+const SavedGames = () => {
   const [userData, setUserData] = useState<User>({
     username: '',
     email: '',
     password: '',
-    savedBooks: [],
+    savedGames: [],
   });
-
-  // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
 
   // Query to retrieve saved user data
   const { loading, data, error, refetch } = useQuery(GET_ME);
@@ -27,8 +24,8 @@ const SavedBooks = () => {
 
   const userProfileData = data;
   
-  // Mutation to delete a book from the user's favorites
-  const [removeBook] = useMutation(REMOVE_BOOK);
+  // Mutation to delete a game from the user's favorites
+  const [removeGame] = useMutation(REMOVE_GAME);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -56,7 +53,7 @@ const SavedBooks = () => {
             username: userProfileData.me.username,
             email: userProfileData.me.email,
             password: '',
-            savedBooks: userProfileData.me.savedBooks,
+            savedGames: userProfileData.me.savedGames,
           };
           setUserData(user);
         };
@@ -68,22 +65,22 @@ const SavedBooks = () => {
     getUserData();
   }, [data]);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId: string) => {
+  // create function that accepts the game's mongo _id value as param and deletes the game from the database
+  const handleDeleteGame = async (_id: string) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
 
     try {
-      removeBook({ variables: { bookId } });
+      await removeGame({ variables: { _id } });
 
       if (error) {
         throw new Error('something went wrong!');
       };
 
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      // upon success, remove game's id from localStorage
+      removeGameId(_id);
     } catch (err) {
       console.error(err);
     }
@@ -99,41 +96,41 @@ const SavedBooks = () => {
       <div className='text-light bg-dark p-5'>
         <Container>
           {userData.username ? (
-            <h1>Viewing {userData.username}'s saved books!</h1>
+            <h1>Viewing {userData.username}'s saved games!</h1>
           ) : (
-            <h1>Viewing saved books!</h1>
+            <h1>Viewing saved games!</h1>
           )}
         </Container>
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? 'book' : 'books'
+          {userData.savedGames.length
+            ? `Viewing ${userData.savedGames.length} saved ${
+                userData.savedGames.length === 1 ? 'game' : 'games'
               }:`
-            : 'You have no saved books!'}
+            : 'You have no saved games!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData.savedGames.map((game) => {
             return (
-              <Col md='4'>
-                <Card key={book.bookId} border='dark'>
-                  {book.image ? (
+              <Col key={game._id} md='4'>
+                <Card border='dark' id={game._id}>
+                  {game.image ? (
                     <Card.Img
-                      src={book.image}
-                      alt={`The cover for ${book.title}`}
+                      src={game.image}
+                      alt={`The cover for ${game.title}`}
                       variant='top'
                     />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{book.title}</Card.Title>
-                    <p className='small'>Authors: {book.authors}</p>
-                    <Card.Text>{book.description}</Card.Text>
+                    <Card.Title>{game.title}</Card.Title>
+                    <p className='small'>Publisher: {game.publisher}</p>
+                    <Card.Text>{game.description}</Card.Text>
                     <Button
                       className='btn-block btn-danger'
-                      onClick={() => handleDeleteBook(book.bookId)}
+                      onClick={() => handleDeleteGame(game._id)}
                     >
-                      Delete this Book!
+                      Delete this Game!
                     </Button>
                   </Card.Body>
                 </Card>
@@ -146,4 +143,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedGames;
