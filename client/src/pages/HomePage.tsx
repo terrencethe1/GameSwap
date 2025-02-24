@@ -32,16 +32,14 @@ const SearchLibrary = () => {
   const [searchInput, setSearchInput] = useState('');
 
   // create state to hold saved game _id values
-  const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
+  const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
-  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
+  // set up useEffect hook to save `recordedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     const getLibraryData = async () => {
       try {
         await getLibrary;
-
-        console.log(libraryData);
     
         if (!loading) {
           setSearchedGames(libraryData.gameSwapLibrary);
@@ -52,8 +50,9 @@ const SearchLibrary = () => {
       }
     };
     getLibraryData();
-    return () => saveGameIds(savedGameIds);
-  }, [data]);
+    saveGameIds(recordedGameIds);
+    return () => saveGameIds(recordedGameIds);
+  }, [data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -92,9 +91,9 @@ const SearchLibrary = () => {
   };
 
   // create function to handle saving a game to our user profile
-  const handleSaveGame = async (_id: string) => {
+  const handleSaveGame = async (title: string) => {
     // find the game in `searchedGames` state by the matching _id
-    const gameToSave: Game = searchedGames.find((game) => game._id === _id)!;
+    const gameToSave: Game = searchedGames.find((game) => game.title === title)!;
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -111,7 +110,10 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setSavedGameIds([...savedGameIds, gameToSave._id]);
+      setRecordedGameIds([...recordedGameIds, gameToSave.title]);
+
+      console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
+
     } catch (err) {
       console.error(err);
     }
@@ -165,10 +167,10 @@ const SearchLibrary = () => {
                     <Card.Text>{game.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game._id)}>
-                        {savedGameIds?.some((savedGameId: string) => savedGameId === game._id)
+                        onClick={() => handleSaveGame(game.title)}>
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>
