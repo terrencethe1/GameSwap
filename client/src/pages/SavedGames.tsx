@@ -113,8 +113,8 @@ const SavedGames = () => {
         <Row>
           {userData.savedGames.map((game) => {
             return (
-              <Col key={game._id} md='4'>
-                <Card border='dark' id={game._id}>
+              <Col md='4'>
+                <Card key={game._id} border='dark'>
                   {game.image ? (
                     <Card.Img
                       src={game.image}
@@ -124,6 +124,7 @@ const SavedGames = () => {
                   ) : null}
                   <Card.Body>
                     <Card.Title>{game.title}</Card.Title>
+                    <p className='small'>Released: {game.released}</p>
                     <p className='small'>Publisher: {game.publisher}</p>
                     <Card.Text>{game.description}</Card.Text>
                     <Button
