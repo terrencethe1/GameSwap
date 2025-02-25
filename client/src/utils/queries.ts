@@ -20,7 +20,6 @@ query GetMe {
       returnDate
     }
   }
-  }
 }
 `;
 

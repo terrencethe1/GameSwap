@@ -31,9 +31,6 @@ mutation RemoveGame($_id: ID!) {
   removeGame(_id: $_id) {
     _id {
       _id
-      available
-      description
-      image
       publisher
       released
       title
