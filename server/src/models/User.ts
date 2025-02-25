@@ -2,14 +2,14 @@ import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // import schema from Game.js
-import { LibraryGame } from './Game.js';
+import { LibraryGame, type GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
   _id: string;
   username: string;
   email: string;
   password: string;
-  savedGames: Schema.Types.ObjectId[];
+  savedGames: GameDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
   gameCount: number;
 }

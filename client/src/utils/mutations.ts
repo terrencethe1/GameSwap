@@ -30,9 +30,6 @@ export const REMOVE_GAME = gql `
 mutation RemoveGame($_id: ID!) {
   removeGame(_id: $_id) {
     _id
-    available
-    description
-    image
     publisher
     released
     title
@@ -41,8 +38,8 @@ mutation RemoveGame($_id: ID!) {
 `;
 
 export const SAVE_GAME = gql `
-mutation SaveGame($description: String!, $title: String!, $publisher: String, $image: String, $released: String) {
-  saveGame(description: $description, title: $title, publisher: $publisher, image: $image, released: $released) {
+mutation SaveGame($_id: ID!) {
+  saveGame(_id: $_id) {
     _id
     available
     description

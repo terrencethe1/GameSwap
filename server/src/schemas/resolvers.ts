@@ -1,3 +1,4 @@
+// import { ObjectId } from "mongoose";
 import { User, UserDocument, GameDocument, LibraryGame } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
@@ -94,7 +95,7 @@ const resolvers = {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedGames: { _id: removeGameArgs._id } } },
+                { $pull: { savedGames: removeGameArgs._id } },
                 { new: true }
               ).populate('savedGames');
               if (!updatedUser) {
