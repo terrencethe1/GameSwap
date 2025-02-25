@@ -1,4 +1,4 @@
-// import { ObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
 import { User, UserDocument, GameDocument, LibraryGame } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
@@ -28,7 +28,7 @@ const resolvers = {
               const params = { id: context.user.id, username: context.user.username };
               return User.findOne({
                 $or: [{ _id: params.id }, { username: params.username }],
-            }).populate('savedGames');
+            }).populate({ path: 'savedGames', populate: { path: '_id' } });
           };
           throw new AuthenticationError('Could not authenticate user.');
         },
@@ -76,13 +76,13 @@ const resolvers = {
             return { token, user };
         },
         // save a game to a user's `savedGames` field by adding it to the set (to prevent duplicates)
-        saveGame: async (_parent: any, saveGameArgs: GameDocument, context: any) => {
+        saveGame: async (_parent: any, saveGameArgs: ObjectId, context: any) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { savedGames: saveGameArgs } },
                 { new: true, runValidators: true }
-              ).populate('savedGames');
+              ).populate({ path: 'savedGames', populate: { path: '_id' } })
               if (!updatedUser) {
                 throw new AuthenticationError(`Cannot add ${saveGameArgs}.`);
               };
@@ -91,13 +91,13 @@ const resolvers = {
             throw new AuthenticationError('Cannot find context.');
         },
         // remove a game from `savedGames`
-        removeGame: async (_parent: any, removeGameArgs: GameDocument, context: any) => {
+        removeGame: async (_parent: any, removeGameArgs: ObjectId, context: any) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedGames: removeGameArgs._id } },
+                { $pull: { savedGames: removeGameArgs } },
                 { new: true }
-              ).populate('savedGames');
+              ).populate({ path: 'savedGames', populate: { path: '_id' } })
               if (!updatedUser) {
                 throw new AuthenticationError('Cannot find saved game _id.');
               };
