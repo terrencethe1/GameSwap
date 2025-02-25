@@ -91,9 +91,9 @@ const SearchLibrary = () => {
   };
 
   // create function to handle saving a game to our user profile
-  const handleSaveGame = async (title: string) => {
+  const handleSaveGame = async (_id: string) => {
     // find the game in `searchedGames` state by the matching _id
-    const gameToSave: Game = searchedGames.find((game) => game.title === title)!;
+    const gameToSave: Game = searchedGames.find((game) => game._id === _id)!;
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -110,9 +110,9 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setRecordedGameIds([...recordedGameIds, gameToSave.title]);
+      setRecordedGameIds([...recordedGameIds, gameToSave._id]);
 
-      console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
+      console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
 
     } catch (err) {
       console.error(err);
@@ -155,7 +155,7 @@ const SearchLibrary = () => {
         <Row>
           {searchedGames.map((game) => {
             return (
-              <Col md="4" key={game.title}>
+              <Col md="4" key={game._id}>
                 <Card border='dark'>
                   {game.image ? (
                     <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' />
@@ -167,10 +167,10 @@ const SearchLibrary = () => {
                     <Card.Text>{game.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game.title)}>
-                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
+                        onClick={() => handleSaveGame(game._id)}>
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>

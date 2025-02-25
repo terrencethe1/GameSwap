@@ -2,10 +2,10 @@ import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // import schema from Game.js
-import { gameSchema, type GameDocument } from './Game.js';
+import { LibraryGame, type GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   password: string;
@@ -32,7 +32,12 @@ const userSchema = new Schema<UserDocument>(
       required: true,
     },
     // set savedGames to be an array of data that adheres to the gameSchema
-    savedGames: [gameSchema],
+    savedGames: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: LibraryGame
+      }
+    ],
   },
   // set this to use virtual below
   {
