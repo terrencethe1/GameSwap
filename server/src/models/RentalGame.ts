@@ -1,9 +1,9 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, Date } from 'mongoose';
 import { LibraryGame } from "./Game.js";
 
 export interface RentalGameDocument extends Document {
     _id: Schema.Types.ObjectId;
-    returnDate: string;
+    returnDate: Date;
 }
 
 const rentalGameSchema = new Schema<RentalGameDocument>({

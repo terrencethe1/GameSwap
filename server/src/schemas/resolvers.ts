@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-import { User, UserDocument, GameDocument, LibraryGame } from "../models/index.js";
+import { User, type UserDocument, type GameDocument, LibraryGame } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
 // Argument Types
@@ -77,10 +77,17 @@ const resolvers = {
         },
         // save a game to a user's `savedGames` field by adding it to the set (to prevent duplicates)
         saveGame: async (_parent: any, saveGameArgs: ObjectId, context: any) => {
+            const generateReturnDate = new Date(new Date().setDate(new Date().getDate() + 14)).toDateString();
+          
+            const rentalData = {
+              _id: saveGameArgs,
+              returnDate: generateReturnDate
+            }
+
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedGames: saveGameArgs } },
+                { $addToSet: { savedGames: rentalData } },
                 { new: true, runValidators: true }
               ).populate({ path: 'savedGames', populate: { path: '_id' } })
               if (!updatedUser) {

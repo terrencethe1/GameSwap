@@ -126,13 +126,14 @@ const SavedGames = () => {
                     <Card.Title>{game._id.title}</Card.Title>
                     <p className='small'>Released: {game._id.released}</p>
                     <p className='small'>Publisher: {game._id.publisher}</p>
-                    <Card.Text>{game._id.description}</Card.Text>
+                    {/* <Card.Text>{game._id.description}</Card.Text> */}
                     <Button
                       className='btn-block btn-danger'
                       onClick={() => handleDeleteGame(game._id._id)}
                     >
-                      Delete this Game!
+                      Return this Game!
                     </Button>
+                    <p id='due-date'> <b>Return Date: {game.returnDate}</b> </p>
                   </Card.Body>
                 </Card>
               </Col>
