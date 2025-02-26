@@ -123,12 +123,13 @@ const SearchLibrary = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5 bgcolor center">
+      <div className="text-light bg-dark p-5 bgcolor">
         <Container>
-          <h1>Search for Games!</h1>
-          <Form onSubmit={handleFormSubmit} className='maxwdithsmall'>
+          <h1 className='center'>Search for Games!</h1>
+          <Form onSubmit={handleFormSubmit}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col className='col-3'></Col>
+              <Col xs={12} md={8} lg={5}>
                 <Form.Control
                   name='searchInput'
                   value={searchInput}
@@ -138,7 +139,7 @@ const SearchLibrary = () => {
                   placeholder='Search for a game'
                 />
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={4} lg={3}>
                 <Button type='submit' variant='success' size='lg' className='buttonclr1'>
                   Submit Search
                 </Button>

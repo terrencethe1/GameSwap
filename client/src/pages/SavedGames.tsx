@@ -113,8 +113,8 @@ const SavedGames = () => {
         <Row>
           {userData.savedGames.map((game) => {
             return (
-              <Col md='4'>
-                <Card key={game._id.title} border='dark'>
+              <Col key={game._id.title} md='4'>
+                <Card border='dark'>
                   {game._id.image ? (
                     <Card.Img
                       src={game._id.image}
