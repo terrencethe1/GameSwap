@@ -121,10 +121,10 @@ const SearchLibrary = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5">
+      <div className="text-light bg-dark p-5 bgcolor center">
         <Container>
           <h1>Search for Games!</h1>
-          <Form onSubmit={handleFormSubmit}>
+          <Form onSubmit={handleFormSubmit} className='maxwdithsmall'>
             <Row>
               <Col xs={12} md={8}>
                 <Form.Control
@@ -137,7 +137,7 @@ const SearchLibrary = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='success' size='lg' className='buttonclr1'>
                   Submit Search
                 </Button>
               </Col>
@@ -146,8 +146,8 @@ const SearchLibrary = () => {
         </Container>
       </div>
 
-      <Container>
-        <h2 className='pt-5'>
+      <Container className='dmbbg bdrcolor'>
+        <h2 className='pt-5 text-light'>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
             : 'Search for a game to begin'}
@@ -156,7 +156,7 @@ const SearchLibrary = () => {
           {searchedGames.map((game) => {
             return (
               <Col md="4" key={game.title}>
-                <Card border='dark'>
+                <Card border='dark' className='margin'>
                   {game.image ? (
                     <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' />
                   ) : null}

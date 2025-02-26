@@ -38,7 +38,15 @@ const resolvers = {
           } else {
             return LibraryGame.find().select('-available');
           };
-        } 
+        },
+        searchBar: async (_parent: any, searchArgs: string, context: any): Promise<GameDocument[] | null> => {
+          if (context.user) {
+            return LibraryGame.findOne(
+              { title: { $regex: `${searchArgs}` } }
+            );
+          };
+          throw new AuthenticationError('Could not authenticate user.');
+        }
     },
     Mutation: {
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)

@@ -6,33 +6,35 @@ import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
 
+
+
+
+
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg='dark' variant='dark' expand='lg' className='bgcolor'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            GameSwap: Power to the Gamers
+            <img src='./logo.png' alt="GameSwap Logo" width="100" height="auto" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/'>
+              <Nav.Link as={Link} to='/' className='bold'>
                 Search For Games
               </Nav.Link>
               {/* if user is logged in show saved games and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Games
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link as={Link} to='/saved' className='bold'> See Your Games</Nav.Link>
+                  <Nav.Link onClick={Auth.logout} className='bold'>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)} className='bold'>Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>

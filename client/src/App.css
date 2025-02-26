@@ -15,3 +15,54 @@ h6 {
   font-weight: 300;
   font-style: italic;
 }
+
+
+.bgcolor {
+  background-color: #041425 !important;
+}
+
+.bdrcolor {
+  border-color: #0A3465 !important;
+ 
+  background-color: #0A3465 !important;
+}
+
+.dmbbg {
+  background-color: #0A3465 !important;
+}
+
+.buttonclr1 {
+ background-color: #207989 !important;
+}
+
+.buttonclr2 {
+  background-color: #397DCA !important;
+ }
+
+ .bold {
+  font-size: 18px;
+  font-weight: bold;
+ }
+
+ .maxwdithsmall {
+  max-width: 600px;
+ }
+
+ .center {
+  text-align: center;
+ }
+
+ #root {
+  background-color: #0A3465 !important;
+ }
+
+ .margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+ }
+
+ .footermargin {
+  margin-top: 25px;
+ }
