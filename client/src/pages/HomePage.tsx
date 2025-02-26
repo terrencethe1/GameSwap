@@ -110,7 +110,7 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setRecordedGameIds([...recordedGameIds, gameToSave._id]);
+      setRecordedGameIds([...recordedGameIds, gameToSave.title]);
 
       // console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
 
@@ -155,7 +155,7 @@ const SearchLibrary = () => {
         <Row>
           {searchedGames.map((game) => {
             return (
-              <Col md="4" key={game._id}>
+              <Col md="4" key={game.title}>
                 <Card border='dark'>
                   {game.image ? (
                     <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' />
@@ -167,10 +167,10 @@ const SearchLibrary = () => {
                     { /* <Card.Text>{game.description}</Card.Text> */}
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
-                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>
