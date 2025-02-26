@@ -60,6 +60,7 @@ const SearchLibrary = () => {
     event.preventDefault();
 
     if (!searchInput) {
+      setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
     }
 
