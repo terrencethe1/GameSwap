@@ -24,7 +24,6 @@ const resolvers = {
         // get a single user by either his id or his username
         me: async (_parent: any, _args: MyGamesArgs, context: any): Promise<UserDocument | null> => {
           if (context.user) {
-              // const params = _id ? { _id } : { username };
               const params = { id: context.user.id, username: context.user.username };
               return User.findOne({
                 $or: [{ _id: params.id }, { username: params.username }],
@@ -32,6 +31,7 @@ const resolvers = {
           };
           throw new AuthenticationError('Could not authenticate user.');
         },
+        // Retrieve an array of all the games in the GameSwap Library
         gameSwapLibrary: async (_parent: any, _args: any, context: any): Promise<GameDocument[]> => {
           if (context.user) {
             return LibraryGame.find();
@@ -39,6 +39,7 @@ const resolvers = {
             return LibraryGame.find().select('-available');
           };
         },
+        // A query to search for a game in the Library based on title
         searchBar: async (_parent: any, searchArgs: string, context: any): Promise<GameDocument[] | null> => {
           if (context.user) {
             return LibraryGame.findOne(
@@ -76,7 +77,6 @@ const resolvers = {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
         addUser: async (_parent: any, { username, email, password }: NewUserArgs) => {
             const user = await User.create({ username, email, password });
-            // console.log("New User:", user);
           
             // Sign a token with the user's information
             const token = signToken(user.username, user.email, user._id);
