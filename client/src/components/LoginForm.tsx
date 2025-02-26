@@ -11,7 +11,7 @@ import { LOGIN_USER } from '../utils/mutations';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({}: { handleModalClose: () => void }) => {
-  const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedBooks: [] });
+  const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedGames: [] });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -50,7 +50,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
       username: '',
       email: '',
       password: '',
-      savedBooks: [],
+      savedGames: [],
     });
   };
 
