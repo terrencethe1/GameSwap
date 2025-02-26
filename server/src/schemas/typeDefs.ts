@@ -4,7 +4,7 @@ const typeDefs = `
         username: String
         email: String
         password: String
-        savedGames: [Game]
+        savedGames: [RentalGame]
         gameCount: Int
     }
 
@@ -16,6 +16,11 @@ const typeDefs = `
         image: String
         title: String
         available: Boolean
+    }
+
+    type RentalGame {
+        _id: Game
+        returnDate: String
     }
 
     type Auth {
@@ -31,8 +36,8 @@ const typeDefs = `
     type Mutation {
         loginUser(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveGame(_id: ID!): [Game]
-        removeGame(_id: ID!): [Game]
+        saveGame(_id: ID!): [RentalGame]
+        removeGame(_id: ID!): [RentalGame]
     }
 `;
 

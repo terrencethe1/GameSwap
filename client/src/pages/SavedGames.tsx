@@ -114,25 +114,26 @@ const SavedGames = () => {
           {userData.savedGames.map((game) => {
             return (
               <Col md='4'>
-                <Card key={game._id} border='dark'>
-                  {game.image ? (
+                <Card key={game._id._id} border='dark'>
+                  {game._id.image ? (
                     <Card.Img
-                      src={game.image}
-                      alt={`The cover for ${game.title}`}
+                      src={game._id.image}
+                      alt={`The cover for ${game._id.title}`}
                       variant='top'
                     />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{game.title}</Card.Title>
-                    <p className='small'>Released: {game.released}</p>
-                    <p className='small'>Publisher: {game.publisher}</p>
-                    <Card.Text>{game.description}</Card.Text>
+                    <Card.Title>{game._id.title}</Card.Title>
+                    <p className='small'>Released: {game._id.released}</p>
+                    <p className='small'>Publisher: {game._id.publisher}</p>
+                    {/* <Card.Text>{game._id.description}</Card.Text> */}
                     <Button
                       className='btn-block btn-danger'
-                      onClick={() => handleDeleteGame(game._id)}
+                      onClick={() => handleDeleteGame(game._id._id)}
                     >
-                      Delete this Game!
+                      Return this Game!
                     </Button>
+                    <p id='due-date'> <b>Return Date: {game.returnDate}</b> </p>
                   </Card.Body>
                 </Card>
               </Col>

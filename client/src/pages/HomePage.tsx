@@ -164,7 +164,7 @@ const SearchLibrary = () => {
                     <Card.Title>{game.title}</Card.Title>
                     <p className='small'>Released: {game.released}</p>
                     <p className='small'>Publisher: {game.publisher}</p>
-                    <Card.Text>{game.description}</Card.Text>
+                    { /* <Card.Text>{game.description}</Card.Text> */}
                     {Auth.loggedIn() && (
                       <Button
                         disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}

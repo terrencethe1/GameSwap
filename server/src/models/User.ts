@@ -1,15 +1,14 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-// import schema from Game.js
-import { LibraryGame, type GameDocument } from './Game.js';
+import { rentalGameSchema, type RentalGameDocument } from './RentalGame.js';
 
 export interface UserDocument extends Document {
   _id: string;
   username: string;
   email: string;
   password: string;
-  savedGames: GameDocument[];
+  savedGames: RentalGameDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
   gameCount: number;
 }
@@ -32,12 +31,7 @@ const userSchema = new Schema<UserDocument>(
       required: true,
     },
     // set savedGames to be an array of data that adheres to the gameSchema
-    savedGames: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: LibraryGame
-      }
-    ],
+    savedGames: [rentalGameSchema],
   },
   // set this to use virtual below
   {

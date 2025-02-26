@@ -8,13 +8,16 @@ query GetMe {
     email
     gameCount
     savedGames {
-      _id
-      title
-      image
-      description
-      publisher
-      released
-      available
+      _id {
+        _id
+        available
+        description
+        image
+        publisher
+        released
+        title
+      }
+      returnDate
     }
   }
 }

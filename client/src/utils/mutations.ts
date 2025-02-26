@@ -29,10 +29,13 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
 export const REMOVE_GAME = gql `
 mutation RemoveGame($_id: ID!) {
   removeGame(_id: $_id) {
-    _id
-    publisher
-    released
-    title
+    _id {
+      _id
+      publisher
+      released
+      title
+    }
+    returnDate
   }
 }
 `;
@@ -40,13 +43,16 @@ mutation RemoveGame($_id: ID!) {
 export const SAVE_GAME = gql `
 mutation SaveGame($_id: ID!) {
   saveGame(_id: $_id) {
-    _id
-    available
-    description
-    image
-    publisher
-    released
-    title
+    _id {
+      _id
+      available
+      description
+      image
+      publisher
+      released
+      title
+    }
+    returnDate
   }
 }
 `;
