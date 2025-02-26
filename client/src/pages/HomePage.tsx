@@ -171,8 +171,8 @@ const SearchLibrary = () => {
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
                         {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
-                          ? 'This game has already been saved!'
-                          : 'Save this Game!'}
+                          ? 'This game has already been checked out!'
+                          : 'Checkout this Game!'}
                       </Button>
                     )}
                   </Card.Body>

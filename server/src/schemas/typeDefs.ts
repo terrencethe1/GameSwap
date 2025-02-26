@@ -31,7 +31,7 @@ const typeDefs = `
     type Query {
         me: User
         gameSwapLibrary: [Game]
-        searchBar: [Game]
+        searchBar(title: String!): [Game]
     }
 
     type Mutation {
