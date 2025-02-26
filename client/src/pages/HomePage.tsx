@@ -13,17 +13,13 @@ import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
 
-import { GAME_SWAP_LIBRARY } from '../utils/queries';
+import { GAME_SWAP_LIBRARY, SEARCH_BAR } from '../utils/queries';
 import { SAVE_GAME } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 
 const SearchLibrary = () => {
   // Query to retrieve saved user data
-  const { loading, data, refetch } = useQuery(GAME_SWAP_LIBRARY);
-
-  const getLibrary = refetch();
-
-  const libraryData = data;
+  const entireLibrary = useQuery(GAME_SWAP_LIBRARY);
 
   // create state for holding returned gameSwapLibrary data
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
@@ -31,28 +27,31 @@ const SearchLibrary = () => {
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
+  // Search Bar Query
+  const searchByTitle = useQuery(SEARCH_BAR, { variables: { title: searchInput } });
+
   // create state to hold saved game _id values
   const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
   // set up useEffect hook to save `recordedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    const getLibraryData = async () => {
+    const getEntireLibraryData = async () => {
       try {
-        await getLibrary;
+        await entireLibrary.refetch();
     
-        if (!loading) {
-          setSearchedGames(libraryData.gameSwapLibrary);
+        if (!entireLibrary.loading) {
+          setSearchedGames(entireLibrary.data.gameSwapLibrary);
         };
 
       } catch (err) {
         console.error(err);
       }
     };
-    getLibraryData();
+    getEntireLibraryData();
     saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
-  }, [data, recordedGameIds]);
+  }, [entireLibrary.data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -65,13 +64,15 @@ const SearchLibrary = () => {
     }
 
     try {
-      const response = await libraryData;
+      const response = await searchByTitle.data;
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const { items } = await response.json();
+      const items = await response.searchBar;
+
+      // console.log(items);
 
       const gameData = items.map((game: Game) => ({
         _id: game._id,
