@@ -1,0 +1,165 @@
+[33mcommit 1ed79a281bf04b5449b05eb9f493b486e20ed21e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfooter[m[33m, [m[1;31morigin/footer[m[33m)[m
+Author: Thida612 <angelic722@gmail.com>
+Date:   Tue Feb 25 19:45:37 2025 -0600
+
+    add footer to the components folder
+
+[33mcommit 137541621e7cb1da3beb1b0c6b49a5117b406768[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 3c64cd1 e993eb2
+Author: Tnielsen3805 <thomas.nielsen3805@gmail.com>
+Date:   Mon Feb 24 18:35:05 2025 -0600
+
+    Merge pull request #29 from terrencethe1/feature/homepage-cm
+    
+    Feature/homepage cm
+
+[33mcommit e993eb22b94827224d1189384a7ec8e1f87b1580[m[33m ([m[1;31morigin/feature/homepage-cm[m[33m)[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 18:17:11 2025 -0600
+
+    Commented out a troubleshooting console log on line 115 of 'client/src/pages/HomePage.tsx'.
+
+[33mcommit 1536ad3f26b2124fbac838119f532795742d7cb7[m
+Merge: 055a07c fc8ca4d
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 18:08:37 2025 -0600
+
+    Merge pull request #30 from terrencethe1/feature/relational-documents
+    
+    Feature/relational documents
+
+[33mcommit fc8ca4d6498cf2df7264074cfa5487410bbf6f11[m[33m ([m[1;31morigin/feature/relational-documents[m[33m)[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 18:07:23 2025 -0600
+
+    All queries and mutations now work with the relational definition of 'savedGames' in 'server/src/models/User.ts'. The client has been refactored to utilize the new mutation definitions.
+
+[33mcommit b1d8877573e9bdaf71bbbef80e5841f8a778b88b[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 17:22:10 2025 -0600
+
+    Converted the 'savedGames' array in 'server/src/models/User.ts' to an array of ObjectId. Modified the 'saveGame' mutation in 'server/src/schemas/' to deal with the new 'Game' model. Added 'populate' function to the 'saveGame' and 'removeGame' mutations in 'server/src/schemas/resolvers.ts'. The 'removeGame' mutation doesn't work with the new 'User' model yet.
+
+[33mcommit 055a07c111a92a52987966d71e031e5bd4a36e75[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 04:34:39 2025 -0600
+
+    Resolved error in clearing the localStorage 'saved_games' by changing the tracked attribute to the game title.
+
+[33mcommit 82e65168fb87ef23b53232f9d1f8fc6e76584788[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 01:56:21 2025 -0600
+
+    Changed the 'savedGameIds' useState in 'HomePage.tsx' to 'recordedGameIds' to make it easier to differentiate from the 'saveGameIds' function in 'localStorage.ts'.
+
+[33mcommit 2f2eb7222c6a916363966308ca20853a79605ddf[m
+Merge: b867797 3c64cd1
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 01:32:03 2025 -0600
+
+    Merge branch 'main' of github.com:terrencethe1/GameSwap into feature/homepage-cm
+
+[33mcommit b867797c472ddda60ce3f90982504179cf329a2e[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Mon Feb 24 01:31:19 2025 -0600
+
+    Modified 'See your books' in 'Navbar.tsx' to read 'See your games'. Added a useEffect on 'HomePage.tsx' to run the 'saveGameIds' function each time the 'savedGameIds' useState changes.
+
+[33mcommit 3c64cd1758c71c1a3a65d891c420e40f8bb9b5da[m
+Merge: b79c469 49a3363
+Author: terrencethe1 <terrence.jsr@gmail.com>
+Date:   Sun Feb 23 23:52:34 2025 -0600
+
+    Merge pull request #28 from terrencethe1/feature/homepage-cm
+    
+    MVP with most basic functions complete.
+
+[33mcommit 49a336388572f0954ae2c80f55ff1c07314e77be[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sun Feb 23 23:40:44 2025 -0600
+
+    Added a 'Released:' field to the display cards on 'HomePage.tsx'. Changed constants, variables, and labels that reference 'books' in 'HomePage.tsx' and 'Navbar.tsx' to reference 'games' instead.
+
+[33mcommit 8669e6e83356e3a1fd9976e995277621acbf4adc[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sun Feb 23 22:38:54 2025 -0600
+
+    Replaced 'SearchBooks.tsx' with 'HomePage.tsx' and refactored it to accept the new queries and mutations. Replaced 'SavedBooks.tsx' with 'SavedGames.tsx' and refactored it to accept the new queries and mutations. Updated the 'localStorage.ts' file to reflect that the user is saving games instead of books. Replaced the 'Book.ts' model in the client with the 'Game.ts' model, and updated the 'User.ts' model to reflect this change. Added the 'concurrently' command back into line 10 of the top level 'package.json'.
+
+[33mcommit b79c4696c8fa85da14ff8da15459ceb4f70ec6f0[m
+Merge: 9a0ef0b 730fb3f
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 16:58:31 2025 -0600
+
+    Merge pull request #26 from terrencethe1/feature/mongoDB-setup
+    
+    Feature/mongo db setup
+
+[33mcommit 730fb3f1a5b1b64af00ee9cef49b4a0474490aab[m[33m ([m[1;31morigin/feature/mongoDB-setup[m[33m)[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 15:45:45 2025 -0600
+
+    Changed the 'REMOVE_BOOK' mutation to 'REMOVE_GAME'.
+
+[33mcommit 1302f737d941aed908333aa2415dbe9e03ec1571[m
+Merge: ebba4e9 880b8fb
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 15:41:43 2025 -0600
+
+    Merge pull request #27 from terrencethe1/feature/client-graphQL
+    
+    Client side mutations and queries are now functional.
+
+[33mcommit 880b8fbe7a24dbea652b2eed63f04b05045a97fa[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 15:38:58 2025 -0600
+
+    Client side mutations and queries are now functional. Added the 'default: true' property to the 'available' element of the gameSchema in 'server/src/models/Game.ts'. Changed the 'User' typeDef in 'server/src/schemas/typeDefs.ts' to have a 'gameCount' element instead of a 'bookCount' element.
+
+[33mcommit ebba4e9870d227517b949d3fbc267b396e7fd3d6[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 15:00:49 2025 -0600
+
+    Removed the troubleshooting test object from the front of the array in 'gameSwapLibrary.json'.
+
+[33mcommit c5a1e73cd2d540b36ba784e0519e75c6aec98cda[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 14:54:19 2025 -0600
+
+    Added a resolver to query the 'gameSwapLibrary'. Added typeDefs for the 'gameSwapLibrary' query.
+
+[33mcommit 0f2f2f5b097d3a6124b58063790ef356e2ae7eff[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 03:16:26 2025 -0600
+
+    Commented out the 'seedUpdateService' functions from 'server/src/routes/api/RAWG.ts'.
+
+[33mcommit f6bacdf8b17b18ac5f756ffe6263cea9a8ea9a70[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 03:04:23 2025 -0600
+
+    Moved '@vitejs/plugin-react' from the dependencies to the devDependencies in the top level package.json file. Edited some comment grammar in 'server/src/schemas/resolvers.ts'.
+
+[33mcommit dbc666eb9830577bb5d2d64b79c091c2744be4ae[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Sat Feb 22 02:45:58 2025 -0600
+
+    Added 'server/src/services/seedUpdateService.ts' to help create and update the 'gameSwapLibrary.json' database seed file. Updated 'RAWG.ts' to filter the response data better, and to make building the 'gameSwapLibrary.json' file more convinient.
+
+[33mcommit 8388f074cae6072ea683087c8e42e05ec5460ebc[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Fri Feb 21 06:43:51 2025 -0600
+
+    Changed '.github/workflows/placeholder.ts' to '.github/workflows/placeholder.yml'.
+
+[33mcommit 8758ca9968a5e224cd0f402251931376c2953fd6[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Fri Feb 21 06:36:47 2025 -0600
+
+    The 'GET /gamesByName/:name' search in 'RAWG.ts' can now handle search results that are larger than a single page.
+
+[33mcommit ba2dd2c21f74fe098950ae2b742761a9ffad2ef7[m
+Author: Christopher Makousky <christopher.makousky@gmail.com>
+Date:   Fri Feb 21 05:44:09 2025 -0600
+
+    Updated the routes in 's
