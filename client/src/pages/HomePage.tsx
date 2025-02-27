@@ -114,7 +114,7 @@ const SearchLibrary = () => {
       // if game successfully saves to user's account, save game id to state
       setRecordedGameIds([...recordedGameIds, gameToSave.title]);
 
-      console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
+      // console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
 
     } catch (err) {
       console.error(err);
