@@ -38,7 +38,7 @@ const SearchLibrary = () => {
   useEffect(() => {
     const getEntireLibraryData = async () => {
       try {
-        await entireLibrary.refetch();
+        await entireLibrary.data;
     
         if (!entireLibrary.loading) {
           setSearchedGames(entireLibrary.data.gameSwapLibrary);
@@ -49,9 +49,9 @@ const SearchLibrary = () => {
       }
     };
     getEntireLibraryData();
-    saveGameIds(recordedGameIds);
+    // saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
-  }, [entireLibrary.data, recordedGameIds]);
+  }, [entireLibrary.data]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
