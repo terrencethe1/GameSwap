@@ -49,9 +49,9 @@ const SearchLibrary = () => {
       }
     };
     getEntireLibraryData();
-    // saveGameIds(recordedGameIds);
+    saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
-  }, [entireLibrary.data]);
+  }, [entireLibrary.data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -114,7 +114,7 @@ const SearchLibrary = () => {
       // if game successfully saves to user's account, save game id to state
       setRecordedGameIds([...recordedGameIds, gameToSave.title]);
 
-      // console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
+      console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
 
     } catch (err) {
       console.error(err);
