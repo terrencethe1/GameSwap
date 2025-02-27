@@ -40,7 +40,7 @@ const SearchLibrary = () => {
       try {
         await entireLibrary.data;
     
-        if (!entireLibrary.loading) {
+        if (!entireLibrary.loading && !searchedGames.length) {
           setSearchedGames(entireLibrary.data.gameSwapLibrary);
         };
 
