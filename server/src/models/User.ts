@@ -30,8 +30,13 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    // set savedGames to be an array of data that adheres to the gameSchema
-    savedGames: [rentalGameSchema],
+    // Set savedGames to be an array of data that adheres to the rentalGameSchema. Each item in the array must be unique.
+    savedGames: [
+      {
+        type: rentalGameSchema,
+        unique: true
+      }
+    ],
   },
   // set this to use virtual below
   {

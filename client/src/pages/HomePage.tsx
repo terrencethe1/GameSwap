@@ -13,17 +13,13 @@ import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
 
-import { GAME_SWAP_LIBRARY } from '../utils/queries';
+import { GAME_SWAP_LIBRARY, SEARCH_BAR } from '../utils/queries';
 import { SAVE_GAME } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 
 const SearchLibrary = () => {
   // Query to retrieve saved user data
-  const { loading, data, refetch } = useQuery(GAME_SWAP_LIBRARY);
-
-  const getLibrary = refetch();
-
-  const libraryData = data;
+  const entireLibrary = useQuery(GAME_SWAP_LIBRARY);
 
   // create state for holding returned gameSwapLibrary data
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
@@ -31,28 +27,31 @@ const SearchLibrary = () => {
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
+  // Search Bar Query
+  const searchByTitle = useQuery(SEARCH_BAR, { variables: { title: searchInput } });
+
   // create state to hold saved game _id values
   const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
   // set up useEffect hook to save `recordedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    const getLibraryData = async () => {
+    const getEntireLibraryData = async () => {
       try {
-        await getLibrary;
+        await entireLibrary.data;
     
-        if (!loading) {
-          setSearchedGames(libraryData.gameSwapLibrary);
+        if (!entireLibrary.loading && !searchedGames.length) {
+          setSearchedGames(entireLibrary.data.gameSwapLibrary);
         };
 
       } catch (err) {
         console.error(err);
       }
     };
-    getLibraryData();
+    getEntireLibraryData();
     saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
-  }, [data, recordedGameIds]);
+  }, [entireLibrary.data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -61,17 +60,20 @@ const SearchLibrary = () => {
     event.preventDefault();
 
     if (!searchInput) {
+      setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
     }
 
     try {
-      const response = await libraryData;
+      const response = await searchByTitle.data;
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const { items } = await response.json();
+      const items = await response.searchBar;
+
+      // console.log(items);
 
       const gameData = items.map((game: Game) => ({
         _id: game._id,
@@ -110,9 +112,9 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setRecordedGameIds([...recordedGameIds, gameToSave._id]);
+      setRecordedGameIds([...recordedGameIds, gameToSave.title]);
 
-      // console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
+      // console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
 
     } catch (err) {
       console.error(err);
@@ -121,12 +123,13 @@ const SearchLibrary = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5 bgcolor center">
+      <div className="text-light bg-dark p-5 bgcolor">
         <Container>
-          <h1>Search for Games!</h1>
-          <Form onSubmit={handleFormSubmit} className='maxwdithsmall'>
+          <h1 className='center'>Search for Games!</h1>
+          <Form onSubmit={handleFormSubmit}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col className='col-3'></Col>
+              <Col xs={12} md={8} lg={5}>
                 <Form.Control
                   name='searchInput'
                   value={searchInput}
@@ -136,7 +139,7 @@ const SearchLibrary = () => {
                   placeholder='Search for a game'
                 />
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={4} lg={3}>
                 <Button type='submit' variant='success' size='lg' className='buttonclr1'>
                   Submit Search
                 </Button>
@@ -155,7 +158,7 @@ const SearchLibrary = () => {
         <Row>
           {searchedGames.map((game) => {
             return (
-              <Col md="4" key={game._id}>
+              <Col md="4" key={game.title}>
                 <Card border='dark' className='margin'>
                   {game.image ? (
                     <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' />
@@ -167,12 +170,12 @@ const SearchLibrary = () => {
                     { /* <Card.Text>{game.description}</Card.Text> */}
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
-                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)
-                          ? 'This game has already been saved!'
-                          : 'Save this Game!'}
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
+                          ? 'This game has already been checked out!'
+                          : 'Checkout this Game!'}
                       </Button>
                     )}
                   </Card.Body>
