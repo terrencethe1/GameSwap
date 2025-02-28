@@ -36,3 +36,17 @@ query GameSwapLibrary {
   }
 }
 `;
+
+export const SEARCH_BAR = gql `
+query SearchBar($title: String!) {
+  searchBar(title: $title) {
+    _id
+    publisher
+    released
+    description
+    image
+    title
+    available
+  }
+}
+`;

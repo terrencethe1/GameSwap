@@ -13,7 +13,6 @@ interface GameSwapType {
   released: string;
   description: string;
   image: string;
-  available: boolean;
 }
 
 // Clean the response data from RAWG searches to only include the name and slug for each game.
@@ -52,8 +51,7 @@ const slugDataCleaner = (data: any): GameSwapType => {
     publisher: data.publishers[0].name,
     released: data.released,
     image: data.background_image,
-    description: data.description,
-    available: true
+    description: data.description
   };
   return cleanData;
 };
@@ -133,7 +131,7 @@ router.get('/gameInfoSlug/:slug', async (req: Request, res: Response) => {
     console.log(cleanData);
 
     // Update the gameSwapLibrary.json file with the new data.
-    // await seedUpdateService.addSearchResults(cleanData.title, cleanData.publisher, cleanData.released, cleanData.description, cleanData.image, cleanData.available);
+    // await seedUpdateService.addSearchResults(cleanData.title, cleanData.publisher, cleanData.released, cleanData.description, cleanData.image);
 
     // Express returns the "cleanData" on the "res" object
     res.status(200).send(cleanData);

@@ -66,7 +66,7 @@ const SavedGames = () => {
   }, [data]);
 
   // create function that accepts the game's mongo _id value as param and deletes the game from the database
-  const handleDeleteGame = async (_id: string) => {
+  const handleDeleteGame = async (_id: string, title: string) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
@@ -80,7 +80,7 @@ const SavedGames = () => {
       };
 
       // upon success, remove game's id from localStorage
-      removeGameId(_id);
+      removeGameId(title);
     } catch (err) {
       console.error(err);
     }
@@ -113,8 +113,8 @@ const SavedGames = () => {
         <Row>
           {userData.savedGames.map((game) => {
             return (
-              <Col md='4'>
-                <Card key={game._id._id} border='dark'className='margin'>
+              <Col key={game._id.title} md='4'>
+                <Card border='dark' className='margin'>
                   {game._id.image ? (
                     <Card.Img
                       src={game._id.image}
@@ -129,11 +129,11 @@ const SavedGames = () => {
                     {/* <Card.Text>{game._id.description}</Card.Text> */}
                     <Button
                       className='btn-block btn-danger'
-                      onClick={() => handleDeleteGame(game._id._id)}
+                      onClick={() => handleDeleteGame(game._id._id, game._id.title)}
                     >
                       Return this Game!
                     </Button>
-                    <p id='due-date'> <b>Return Date: {game.returnDate}</b> </p>
+                    <p id='due-date'> <b>Due Date:</b> {game.returnDate} </p>
                   </Card.Body>
                 </Card>
               </Col>
