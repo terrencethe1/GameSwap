@@ -62,8 +62,8 @@ const SearchLibrary = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setDisplayDescription('')
-    
+    setDisplayDescription('');
+
     if (!searchInput) {
       setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
