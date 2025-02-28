@@ -145,9 +145,9 @@ const SavedGames = () => {
                         Toggle Description
                       </Button>
                       <Button
-                          className='btn-block btn-danger'
-                          onClick={() => handleDeleteGame(game._id._id, game._id.title)}>
-                          Return this Game!
+                        className='btn-block btn-danger'
+                        onClick={() => handleDeleteGame(game._id._id, game._id.title)}>
+                        Return this Game!
                       </Button>
                     </span>
                   </Card.Body>
