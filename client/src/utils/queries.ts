@@ -36,3 +36,16 @@ query GameSwapLibrary {
   }
 }
 `;
+export const SEARCH_GAME = gql `
+query SearchGame {
+  searchGame {
+    _id
+    available
+    description
+    image
+    publisher
+    released
+    title
+  }
+}
+`;

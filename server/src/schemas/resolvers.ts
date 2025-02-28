@@ -2,6 +2,7 @@ import { ObjectId } from "mongoose";
 import { User, type UserDocument, type GameDocument, LibraryGame } from "../models/index.js";
 import { signToken, AuthenticationError } from '../services/auth.js';
 
+
 // Argument Types
 interface LoginUserArgs {
     email: string;
@@ -17,6 +18,10 @@ interface NewUserArgs {
 interface MyGamesArgs {
   _id: any;
   username: string;
+}
+
+interface SearchGameArgs {
+  title: string;
 }
 
 const resolvers = {
@@ -38,7 +43,12 @@ const resolvers = {
           } else {
             return LibraryGame.find().select('-available');
           };
-        } 
+        },
+        // search for a game by title
+        searchGame: async (_parent: any, searchGameArgs: SearchGameArgs) => {
+          const game = await LibraryGame.find({ title: { $regex: `${searchGameArgs.title}`, $options: 'i' } });
+          return game;
+        }
     },
     Mutation: {
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
