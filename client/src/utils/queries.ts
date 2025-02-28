@@ -37,7 +37,7 @@ query GameSwapLibrary {
 }
 `;
 export const SEARCH_GAME = gql `
-query SearchGame {$title: String!) {
+query SearchGame ($title: String!) {
   searchGame (title: $title) {
     _id
     available

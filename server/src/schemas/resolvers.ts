@@ -41,7 +41,7 @@ const resolvers = {
       return LibraryGame.find();
     },
     // A query to search for a game in the Library based on title
-    searchBar: async (_parent: any, searchArgs: SearchGameArgs): Promise<GameDocument[] | null> => {
+    searchGame: async (_parent: any, searchArgs: SearchGameArgs): Promise<GameDocument[] | null> => {
       return LibraryGame.find(
         { title: { $regex: `${searchArgs.title}`, $options: 'i' } }
       );
