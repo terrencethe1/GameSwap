@@ -30,6 +30,9 @@ const SearchLibrary = () => {
   // Search Bar Query
   const searchByTitle = useQuery(SEARCH_BAR, { variables: { title: searchInput } });
 
+  // Mutation to save a game to the user profile
+  const [saveGame, { error }] = useMutation(SAVE_GAME);
+
   // create state to hold saved game _id values
   const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
@@ -55,8 +58,6 @@ const SearchLibrary = () => {
     saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
   }, [entireLibrary.data, recordedGameIds]);
-
-  const [saveGame, { error }] = useMutation(SAVE_GAME);
 
   // create method to search for games and set state on form submit
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
