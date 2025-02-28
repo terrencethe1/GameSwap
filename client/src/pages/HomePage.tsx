@@ -33,6 +33,9 @@ const SearchLibrary = () => {
   // create state to hold saved game _id values
   const [recordedGameIds, setRecordedGameIds] = useState(getSavedGameIds());
 
+  // useState to determine if the game description should display
+  const [displayDescription, setDisplayDescription] = useState<string>(); 
+
   // set up useEffect hook to save `recordedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -59,6 +62,8 @@ const SearchLibrary = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setDisplayDescription('')
+    
     if (!searchInput) {
       setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
@@ -167,17 +172,29 @@ const SearchLibrary = () => {
                     <Card.Title>{game.title}</Card.Title>
                     <p className='small'>Released: {game.released}</p>
                     <p className='small'>Publisher: {game.publisher}</p>
-                    { /* <Card.Text>{game.description}</Card.Text> */}
-                    {Auth.loggedIn() && (
-                      <Button
-                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game._id)}>
-                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
-                          ? 'This game has already been checked out!'
-                          : 'Checkout this Game!'}
+                    {displayDescription === game.title? <Card.Text>{game.description}</Card.Text> : <></>}
+                    <span className='control-buttons'>
+                      <Button 
+                        onClick={() => {
+                          if (displayDescription !== game.title) {
+                            setDisplayDescription(game.title)
+                          } else {
+                            setDisplayDescription('')
+                          }
+                        }}>
+                        Toggle Description
                       </Button>
-                    )}
+                      {Auth.loggedIn() && (
+                        <Button
+                          disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
+                          className='btn-block btn-info'
+                          onClick={() => handleSaveGame(game._id)}>
+                          {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
+                            ? 'This game has already been checked out!'
+                            : 'Checkout this Game!'}
+                        </Button>
+                      )}
+                    </span>
                   </Card.Body>
                 </Card>
               </Col>
