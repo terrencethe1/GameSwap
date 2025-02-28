@@ -96,7 +96,7 @@ const SavedGames = () => {
       <div className='text-light bg-dark p-4 bgcolor'>
         <Container>
           {userData.username ? (
-            <h1>{userData.username}'s saved games!</h1>
+            <h1 className='center'>{userData.username}'s saved games!</h1>
           ) : (
             <h1>Viewing saved games!</h1>
           )}
@@ -114,7 +114,7 @@ const SavedGames = () => {
           {userData.savedGames.map((game) => {
             return (
               <Col key={game._id.title} md='4'>
-                <Card border='dark'>
+                <Card border='dark' className='margin'>
                   {game._id.image ? (
                     <Card.Img
                       src={game._id.image}
