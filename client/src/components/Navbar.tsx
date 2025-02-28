@@ -19,7 +19,7 @@ const AppNavbar = () => {
       <Navbar bg='dark' variant='dark' expand='lg' className='bgcolor'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            <img src='./logo.png' alt="GameSwap Logo" width="100" height="auto" />
+            <img src='./logo.png' alt="GameSwap Logo" width="200" height="auto" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
