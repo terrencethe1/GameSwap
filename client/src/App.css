@@ -40,8 +40,10 @@ h6 {
  }
 
  .bold {
-  font-size: 18px;
+  font-size: 27px;
   font-weight: bold;
+  font-family: 'Orbitron';
+  margin-left: 7px;
  }
 
  .maxwdithsmall {
