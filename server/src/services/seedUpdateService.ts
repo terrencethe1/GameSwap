@@ -6,15 +6,13 @@ class SearchResults {
   released: string;
   description: string;
   image: string;
-  available: boolean;
 
-  constructor(title: string, publisher: string, released: string, description: string, image: string, available: boolean) {
+  constructor(title: string, publisher: string, released: string, description: string, image: string) {
     this.title = title;
     this.publisher = publisher;
     this.released = released;
     this.description = description;
     this.image = image;
-    this.available = available;
   }
 }
 
@@ -49,12 +47,12 @@ class SeedUpdateService {
   }
 
   // Define an addSearchResults method that adds a game to the gameSwapLibrary.json file
-  async addSearchResults(gameName: string, gamePublisher: string, gameReleased: string, gameDescription: string, gameImage: string, gameAvailable: boolean) {
+  async addSearchResults(gameName: string, gamePublisher: string, gameReleased: string, gameDescription: string, gameImage: string) {
     if (!gameName) {
       throw new Error('game cannot be blank');
     }
 
-    const newSearchResults: SearchResults = { title: gameName, publisher: gamePublisher, released: gameReleased, description: gameDescription, image: gameImage, available: gameAvailable };
+    const newSearchResults: SearchResults = { title: gameName, publisher: gamePublisher, released: gameReleased, description: gameDescription, image: gameImage };
 
     // Get all libraryGames, add the new game, write all the updated libraryGames, and then return the newSearchResults.
     return await this.getSearchResults()

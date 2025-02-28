@@ -36,11 +36,13 @@ const SearchLibrary = () => {
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     const getEntireLibraryData = async () => {
+
       try {
         await entireLibrary.data;
     
         if (!entireLibrary.loading && !searchedGames.length) {
           setSearchedGames(entireLibrary.data.gameSwapLibrary);
+        
         };
 
       } catch (err) {
@@ -48,9 +50,10 @@ const SearchLibrary = () => {
       }
     };
     getEntireLibraryData();
+    getEntireLibraryData();
     saveGameIds(recordedGameIds);
     return () => saveGameIds(recordedGameIds);
-  }, [data, recordedGameIds]);
+  }, [entireLibrary.data, recordedGameIds]);
 
   const [saveGame, { error }] = useMutation(SAVE_GAME);
 
@@ -59,17 +62,20 @@ const SearchLibrary = () => {
     event.preventDefault();
 
     if (!searchInput) {
+      setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
     }
 
     try {
-      const response = await entireLibrary;
+      const response = await searchByTitle.data;
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const { items } = await response.json();
+      const items = await response.searchBar;
+
+      // console.log(items);
 
       const gameData = items.map((game: Game) => ({
         _id: game._id,
@@ -108,9 +114,9 @@ const SearchLibrary = () => {
       };
 
       // if game successfully saves to user's account, save game id to state
-      setRecordedGameIds([...recordedGameIds, gameToSave._id]);
+      setRecordedGameIds([...recordedGameIds, gameToSave.title]);
 
-      // console.log("recordedGameIds", [...recordedGameIds, gameToSave._id]);
+      // console.log("recordedGameIds", [...recordedGameIds, gameToSave.title]);
 
     } catch (err) {
       console.error(err);
@@ -119,12 +125,13 @@ const SearchLibrary = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5">
+      <div className="text-light bg-dark p-5 bgcolor">
         <Container>
-          <h1>Search for Games!</h1>
+          <h1 className='center'>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col className='col-3'></Col>
+              <Col xs={12} md={8} lg={5}>
                 <Form.Control
                   name='searchInput'
                   value={searchInput}
@@ -134,8 +141,8 @@ const SearchLibrary = () => {
                   placeholder='Search for a game'
                 />
               </Col>
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+              <Col xs={12} md={4} lg={3}>
+                <Button type='submit' variant='success' size='lg' className='buttonclr1'>
                   Submit Search
                 </Button>
               </Col>
@@ -144,8 +151,8 @@ const SearchLibrary = () => {
         </Container>
       </div>
 
-      <Container>
-        <h2 className='pt-5'>
+      <Container className='dmbbg bdrcolor'>
+        <h2 className='pt-5 text-light'>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
             : 'Search for a game to begin'}
@@ -153,8 +160,8 @@ const SearchLibrary = () => {
         <Row>
           {searchedGames.map((game) => {
             return (
-              <Col md="4" key={game._id}>
-                <Card border='dark'>
+              <Col md="4" key={game.title}>
+                <Card border='dark' className='margin'>
                   {game.image ? (
                     <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' />
                   ) : null}
@@ -165,12 +172,12 @@ const SearchLibrary = () => {
                     { /* <Card.Text>{game.description}</Card.Text> */}
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)}
+                        disabled={recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveGame(game._id)}>
-                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game._id)
-                          ? 'This game has already been saved!'
-                          : 'Save this Game!'}
+                        {recordedGameIds?.some((savedGameId: string) => savedGameId === game.title)
+                          ? 'This game has already been checked out!'
+                          : 'Checkout this Game!'}
                       </Button>
                     )}
                   </Card.Body>
