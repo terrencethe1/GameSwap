@@ -62,8 +62,10 @@ const SearchLibrary = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Clear the displayDescription useState
     setDisplayDescription('');
 
+    // Return the entire library on an empty search
     if (!searchInput) {
       setSearchedGames(entireLibrary.data.gameSwapLibrary);
       return false;
@@ -110,6 +112,7 @@ const SearchLibrary = () => {
     }
 
     try {
+      // Execute the saveGame mutation with input variables of gameToSave
       await saveGame({ variables: gameToSave });
 
       if (error) {

@@ -76,6 +76,7 @@ const SavedGames = () => {
     }
 
     try {
+      // Execute the removeGame mutation with input variables of _id
       await removeGame({ variables: { _id } });
 
       if (error) {
