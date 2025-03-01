@@ -25,12 +25,12 @@ const AppNavbar = () => {
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
               <Nav.Link as={Link} to='/' className='bold'>
-                Search For Games
+                Library
               </Nav.Link>
               {/* if user is logged in show saved games and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved' className='bold'> See Your Games</Nav.Link>
+                  <Nav.Link as={Link} to='/saved' className='bold'>Account</Nav.Link>
                   <Nav.Link onClick={Auth.logout} className='bold'>Logout</Nav.Link>
                 </>
               ) : (
