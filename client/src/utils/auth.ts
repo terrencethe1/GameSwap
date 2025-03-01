@@ -48,7 +48,7 @@ class AuthService {
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    // Clear the list of saved books from localStorage
+    // Clear the list of saved games from localStorage
     localStorage.removeItem('saved_games');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
