@@ -24,7 +24,6 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-            <p className='bold center text-light navmargin'> GameSwap: Power To The Gamers </p>
               <Nav.Link as={Link} to='/' className='bold'>
                 Library
               </Nav.Link>
