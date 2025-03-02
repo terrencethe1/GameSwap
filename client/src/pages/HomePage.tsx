@@ -134,7 +134,7 @@ const SearchLibrary = () => {
     <>
       <div className="text-light bg-dark p-5 bgcolor">
         <Container>
-          <h1 className='center'>Search for Games!</h1>
+          <h1 className='center orbitron'>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col className='col-3'></Col>
@@ -159,7 +159,7 @@ const SearchLibrary = () => {
       </div>
 
       <Container className='dmbbg bdrcolor'>
-        <h2 className='pt-5 text-light'>
+        <h2 className='pt-5 text-light orbitron'>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
             : 'Search for a game to begin'}
