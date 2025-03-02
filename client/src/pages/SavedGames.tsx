@@ -27,6 +27,9 @@ const SavedGames = () => {
   // Mutation to delete a game from the user's favorites
   const [removeGame] = useMutation(REMOVE_GAME);
 
+  // useState to determine if the game description should display
+  const [displayDescription, setDisplayDescription] = useState<string>(); 
+
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -73,6 +76,7 @@ const SavedGames = () => {
     }
 
     try {
+      // Execute the removeGame mutation with input variables of _id
       await removeGame({ variables: { _id } });
 
       if (error) {
@@ -125,15 +129,28 @@ const SavedGames = () => {
                   <Card.Body>
                     <Card.Title>{game._id.title}</Card.Title>
                     <p className='small'>Released: {game._id.released}</p>
-                    <p className='small'>Publisher: {game._id.publisher}</p>
-                    {/* <Card.Text>{game._id.description}</Card.Text> */}
-                    <Button
-                      className='btn-block btn-danger'
-                      onClick={() => handleDeleteGame(game._id._id, game._id.title)}
-                    >
-                      Return this Game!
-                    </Button>
-                    <p id='due-date'> <b>Due Date:</b> {game.returnDate} </p>
+                    <span className='due-date'>
+                      <p className='small'>Publisher: {game._id.publisher}</p>
+                      <p> <b>Due Date:</b> {game.returnDate} </p>
+                    </span>
+                    {displayDescription === game._id.title? <Card.Text>{game._id.description}</Card.Text> : <></>}
+                    <span className='control-buttons'>
+                      <Button 
+                        onClick={() => {
+                          if (displayDescription !== game._id.title) {
+                            setDisplayDescription(game._id.title)
+                          } else {
+                            setDisplayDescription('')
+                          }
+                        }}>
+                        Toggle Description
+                      </Button>
+                      <Button
+                        className='btn-block btn-danger'
+                        onClick={() => handleDeleteGame(game._id._id, game._id.title)}>
+                        Return this Game!
+                      </Button>
+                    </span>
                   </Card.Body>
                 </Card>
               </Col>
