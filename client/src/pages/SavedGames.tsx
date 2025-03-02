@@ -100,14 +100,14 @@ const SavedGames = () => {
       <div className='text-light bg-dark p-4 bgcolor'>
         <Container>
           {userData.username ? (
-            <h1 className='center'>{userData.username}'s saved games!</h1>
+            <h1 className='center orbitron'>{userData.username}'s saved games!</h1>
           ) : (
-            <h1>Viewing saved games!</h1>
+            <h1 className='orbitron'>Viewing saved games!</h1>
           )}
         </Container>
       </div>
       <Container>
-        <h2 className='text-light pt-5 ' >
+        <h2 className='text-light pt-5 orbitron' >
           {userData.savedGames.length
             ? `Viewing ${userData.savedGames.length} saved ${
                 userData.savedGames.length === 1 ? 'game' : 'games'

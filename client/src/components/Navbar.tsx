@@ -21,10 +21,10 @@ const AppNavbar = () => {
           <Navbar.Brand as={Link} to='/'>
             <img src='./logo.png' alt="GameSwap Logo" width="200" height="auto" />
           </Navbar.Brand>
-          <p className='bold center text-light'> GameSwap: Power To The Gamers </p>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
+            <p className='bold center text-light navmargin'> GameSwap: Power To The Gamers </p>
               <Nav.Link as={Link} to='/' className='bold'>
                 Library
               </Nav.Link>

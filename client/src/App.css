@@ -103,3 +103,15 @@ h6 {
 .footermargin {
   margin-top: 25px;
 }
+
+.navmargin {
+  margin-right: 50px;
+}
+
+.orbitron {
+  font-family: 'Orbitron';
+}
+
+.padding {
+  padding-bottom: 30px;
+}
