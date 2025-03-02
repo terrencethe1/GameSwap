@@ -1,22 +1,94 @@
 # GameSwap
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Diablo Swing Orchestra
-### Group Members:
+
+## User Story
+As an avid gamer who enjoys physical media, I would like to be able to expand the number of video games that I can experience. I have limited funds, and I would like to be able to try out new games before I commit to purchasing them.
+ 
+
+## Description   
+GameSwap is a web application that allows users to search, save, and manage their favorite video games. The application uses a React frontend and an Express backend with a MongoDB database. 
+
+## Team
 - Thida Phongsavath
 - Terrence Johnson
 - Michael Jandres
 - Christopher Makousky
 - Thomas Nielsen
 
-## Problem:
-As an avid gamer who enjoys physical media, I would like to be able to expand the number of video games that I can experience. I have limited funds, and I would like to be able to try out new games before I commit to purchasing them.
 
-## Solution:
-### “GameSwap: Power to the Players”
-“GameSwap: Power to the Gamers”
+## Table of Contents
 
-GameSwap is a web-based software application that allows users to borrow video games from an extensive library of hand-selected games. GameSwap is designed for the temporary exchange of physical media. Users will sign up and log into GameSwap from a login modal.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Technologies](#technologies)
+- [License](#license)
 
-Users can browse GameSwap’s database for a variety of interesting titles. GameSwap will keep track of these games in a MongoDB NoSQL database. On the home page, an array of games that are available to borrow will be displayed. A search bar feature will allow users to limit the number of displayed titles based on user input.
+## Installation
 
-Users can select games from the home page that they would like to borrow. Users will be able to view their ongoing swaps on a dedicated “account” page. Details on the end/due dates for each ongoing swap will be available for viewing.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/terrencethe1/GameSwap.git
+    cd GameSwap
+    ```
+
+2. Install dependencies for both client and server:
+    ```sh
+    npm run install
+    ```
+
+3. Create a `.env` file in the [server](http://_vscodecontentref_/0) directory and add your MongoDB URI and JWT secret key:
+    ```env
+    MONGODB_URI='your-mongodb-uri'
+    JWT_SECRET_KEY='your-secret-key'
+    RAWG_API_KEY='your-rawg-api-key'
+
+4. Run build:
+    ```sh
+    npm run build
+
+5. Seed the database:
+    ```sh
+    npm run seed
+
+6. Start the development server:
+    ```sh
+    npm run develop
+    ```
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:3000`.
+2. Use the search bar to find games.
+3. Sign up or log in to save your favorite games.
+4. View your saved games in the "Account" section.
+
+## Features
+
+- **Search Games**: Search for games in the Mongodb NoSQL database .
+- **User Authentication**: Sign up and log in to save your favorite games.
+- **Save Games**: Save games to your account and view them later.
+- **Responsive Design**: The application is fully responsive and works on all devices.
+
+
+## Technologies
+
+- **Frontend**: React, TypeScript, Apollo Client, React Router, Bootstrap,JWT
+- **Backend**: Express, Apollo Server, MongoDB, Mongoose, JWT, TypeScript, Day.js
+- **Testing**: Cypress
+- **Build Tools**: Vite, Concurrently
+
+## License
+
+This project is licensed under the MIT License.
+
+## Deployed Web Application   
+https://gameswap.onrender.com/
+
+![GameSwap](./client/images/screenshot1.png)<br><br>
+![GameSwap](./client/images/screenshot2.png) <br><br>
+![GameSwap](./client/images/screenshot3.png) 
+
+
+
