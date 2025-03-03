@@ -86,9 +86,9 @@ This project is licensed under the MIT License.
 ## Deployed Web Application   
 https://gameswap.onrender.com/
 
-![GameSwap](./images/screenshot1.png)<br><br>
-![GameSwap](./images/screenshot2.png) <br><br>
-![GameSwap](./images/screenshot3.png) 
+![GameSwap](./client/images/screenshot1.png)<br><br>
+![GameSwap](./client/images/screenshot2.png) <br><br>
+![GameSwap](./client/images/screenshot3.png) 
 
 
 
