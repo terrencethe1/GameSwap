@@ -7,7 +7,7 @@ As an avid gamer who enjoys physical media, I would like to be able to expand th
  
 
 ## Description   
-GameSwap is a web application that allows users to search, save, and manage their favorite video games. The application uses a React frontend and an Express backend with a MongoDB database. 
+GameSwap is a web-based software application that allows users to borrow video games from an extensive library of hand-selected games. The application uses a React frontend and an Express backend with a MongoDB database. GameSwap utilizes Apollo GraphQL to communicate between the frontend and the backend.
 
 ## Team
 - Thida Phongsavath
@@ -52,23 +52,23 @@ GameSwap is a web application that allows users to search, save, and manage thei
     ```sh
     npm run seed
 
-6. Start the development server:
+6. Start the server:
     ```sh
-    npm run develop
+    npm run start
     ```
 
 ## Usage
 
-1. Open your browser and navigate to `http://localhost:3000`.
+1. Open your browser and navigate to `http://localhost:3001`.
 2. Use the search bar to find games.
-3. Sign up or log in to save your favorite games.
-4. View your saved games in the "Account" section.
+3. Sign up or log in to checkout your favorite games.
+4. View the due dates for your borrowed games in the "Account" section.
 
 ## Features
 
 - **Search Games**: Search for games in the Mongodb NoSQL database .
-- **User Authentication**: Sign up and log in to save your favorite games.
-- **Save Games**: Save games to your account and view them later.
+- **User Authentication**: Sign up and log in to checkout your favorite games.
+- **Borrow Games**: Checkout games to your account. Due dates default to two weeks after the checkout button is pressed.
 - **Responsive Design**: The application is fully responsive and works on all devices.
 
 
